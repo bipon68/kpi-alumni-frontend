@@ -6,6 +6,7 @@ import ProtectedRoute from "./lib/auth/protectRoute";
 import ManageUserPage from "./app/manage/users/ManageUserPage";
 import ManageDashboardPage from "./app/manage/dashboard/ManageDashboardPage";
 import RegistrationPage from "./app/registration/RegistrationPage";
+import LoadingPage from "./lib/loading/loadingPage";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
@@ -54,5 +55,5 @@ const router = createBrowserRouter(
 );
 
 export const RouteHandler = () => {
-  return <RouterProvider router={router} future={{ v7_startTransition: true }} />;
+  return <RouterProvider router={router} future={{ v7_startTransition: true }} fallbackElement={<LoadingPage />} />;
 };
