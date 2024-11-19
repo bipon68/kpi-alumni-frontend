@@ -33,11 +33,11 @@ const router = createBrowserRouter(
       element: <AdminLayout />,
       children: [
         {
-          path: "manage",
+          path: "/manage",
           element: <ProtectedRoute element={<ManageDashboardPage />} isAuthenticated={isAuthenticated} />,
         },
         {
-          path: "manage/user",
+          path: "/manage/user",
           element: <ProtectedRoute element={<ManageUserPage />} isAuthenticated={isAuthenticated} />,
         },
       ],
