@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    *{
+        font-family: 'Poppins', sans-serif;
+    }
+
+    html{
+        font-size: 16px;
+        scroll-behavior: smooth;
+    }
+
+   section > header,
+   section > div,
+   section > footer{
+      padding: 0 25px;
+   }
+}
