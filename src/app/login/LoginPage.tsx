@@ -1,6 +1,6 @@
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 
-const LoginPage: FC<ReactNode> = () => {
+const LoginPage: FC = () => {
   return <div>LoginPage</div>;
 };
 
