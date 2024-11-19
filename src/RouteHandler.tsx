@@ -32,11 +32,11 @@ const router = createBrowserRouter(
       element: <AdminLayout />,
       children: [
         {
-          path: "/manage",
+          path: "manage",
           element: <ProtectedRoute element={<ManageDashboardPage />} isAuthenticated={isAuthenticated} />,
         },
         {
-          path: "/manage/user",
+          path: "manage/user",
           element: <ProtectedRoute element={<ManageUserPage />} isAuthenticated={isAuthenticated} />,
         },
       ],
@@ -47,10 +47,12 @@ const router = createBrowserRouter(
       v7_normalizeFormMethod: true,
       v7_skipActionErrorRevalidation: true,
       v7_fetcherPersist: true,
+      v7_partialHydration: true,
+      v7_relativeSplatPath: true,
     },
   }
 );
 
 export const RouteHandler = () => {
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} future={{ v7_startTransition: true }} />;
 };
