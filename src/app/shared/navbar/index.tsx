@@ -6,7 +6,7 @@ const NavbarMenu = () => {
       <div className="container mx-auto flex items-center justify-between p-4">
         <div className="flex items-center">
           <img src={logo.mainLogo} alt="Face Search AI Logo" className="h-10 w-10" />
-          <h1 className="ml-3 text-2xl font-bold text-gray-800">Face Match AI</h1>
+          <h1 className="ml-3 text-2xl font-bold text-gray-800">KPI Alumni</h1>
         </div>
         <nav>
           <ul className="flex space-x-6">
