@@ -4,23 +4,24 @@ const LoginPage: FC = () => {
   return (
     <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-300 relative overflow-hidden">
       {/* Floating Squares */}
-      <ul className="absolute w-full h-full top-0 left-0">
+      <ul className="absolute w-full h-full flex flex-wrap">
         {Array.from({ length: 10 }).map((_, i) => (
           <li
             key={i}
-            className="nora-box w-16 h-16 bg-white bg-opacity-30 rounded-md animate-floating"
+            className="w-16 h-16 bg-white bg-opacity-30 rounded-md"
             style={{
               position: "absolute",
-              animation: `floating 10s linear infinite ${Math.random() * 2}s`, // Randomize the start delay for a staggered effect
-              top: "0%", // Start from the top
-              left: `${Math.random() * 100}%`, // Random horizontal position
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animation: `moveSquare ${Math.random() * 5 + 5}s infinite linear`,
+              animationDelay: `${Math.random() * 2}s`,
             }}
           ></li>
         ))}
       </ul>
 
       {/* Login Container */}
-      <div className="bg-white bg-opacity-5  shadow-lg rounded-lg p-8 w-[435px] relative">
+      <div className="bg-white bg-opacity-5 shadow-lg rounded-lg p-8 w-[435px] relative">
         <header className="flex justify-center gap-10 items-center mb-16">
           <img
             src="/src/assets/images/kpi-alumni-logo.png"
@@ -48,6 +49,36 @@ const LoginPage: FC = () => {
           </button>
         </form>
       </div>
+
+      {/* Add custom CSS for the square movement */}
+      <style jsx>{`
+        @keyframes moveSquare {
+          0% {
+            transform: translate(0, 0);
+          }
+          25% {
+            transform: translate(
+              ${Math.random() * 100}%,
+              ${Math.random() * 100}%
+            );
+          }
+          50% {
+            transform: translate(
+              ${Math.random() * 100}%,
+              ${Math.random() * 100}%
+            );
+          }
+          75% {
+            transform: translate(
+              ${Math.random() * 100}%,
+              ${Math.random() * 100}%
+            );
+          }
+          100% {
+            transform: translate(0, 0);
+          }
+        }
+      `}</style>
     </div>
   );
 };
