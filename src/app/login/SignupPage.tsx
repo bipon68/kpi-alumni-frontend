@@ -24,7 +24,7 @@ const SignupPage = () => {
         {Array.from({ length: 10 }).map((_, i) => (
           <li
             key={i}
-            className="w-22 h-22 bg-white bg-opacity-30 rounded-md"
+            className="w-22 h-22 bg-white bg-opacity-15 rounded-md"
             style={{
               position: "absolute",
               top: `${Math.random() * 100}%`,
@@ -47,7 +47,7 @@ const SignupPage = () => {
           <h1 className="text-[40px] font-semibold text-white">Signup</h1>
         </header>
         <form className="flex  gap-6 ">
-          <div className="w-full flex flex-col gap-6 pr-6 border-r">
+          <div className="w-full flex flex-col gap-6 pr-6 mb-30 border-r">
             <div className="flex gap-3">
               <input
                 type="text"
