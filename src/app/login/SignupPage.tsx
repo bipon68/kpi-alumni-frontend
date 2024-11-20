@@ -1,7 +1,6 @@
-import { FC } from "react";
 import { Link } from "react-router-dom";
 
-const LoginPage: FC = () => {
+const SignupPage = () => {
   return (
     <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-300 relative overflow-hidden">
       {/* Floating Squares */}
@@ -29,7 +28,7 @@ const LoginPage: FC = () => {
             alt="Logo"
             className="w-12 h-12 mb-4"
           />
-          <h1 className="text-[40px] font-semibold text-white">Login</h1>
+          <h1 className="text-[40px] font-semibold text-white">Signup</h1>
         </header>
         <form className="flex flex-col gap-6">
           <input
@@ -54,46 +53,46 @@ const LoginPage: FC = () => {
           <div className=" text-center !font-normal text-white ">
             Don't have an account?
             <Link
-              to="/signup"
+              to="/login"
               className="font-semibold rounded-md py-2 text-blue-700 underline"
             >
               {" "}
-              Signup
+              Login
             </Link>
           </div>
         </form>
       </div>
 
       <style>{`
-        @keyframes moveSquare {
-          0% {
-            transform: translate(0, 0);
-          }
-          25% {
-            transform: translate(
-              ${Math.random() * 100}%,
-              ${Math.random() * 100}%
-            );
-          }
-          50% {
-            transform: translate(
-              ${Math.random() * 100}%,
-              ${Math.random() * 100}%
-            );
-          }
-          75% {
-            transform: translate(
-              ${Math.random() * 100}%,
-              ${Math.random() * 100}%
-            );
-          }
-          100% {
-            transform: translate(0, 0);
-          }
-        }
-      `}</style>
+    @keyframes moveSquare {
+      0% {
+        transform: translate(0, 0);
+      }
+      25% {
+        transform: translate(
+          ${Math.random() * 100}%,
+          ${Math.random() * 100}%
+        );
+      }
+      50% {
+        transform: translate(
+          ${Math.random() * 100}%,
+          ${Math.random() * 100}%
+        );
+      }
+      75% {
+        transform: translate(
+          ${Math.random() * 100}%,
+          ${Math.random() * 100}%
+        );
+      }
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+  `}</style>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignupPage;

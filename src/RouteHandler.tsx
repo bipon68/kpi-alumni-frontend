@@ -7,6 +7,7 @@ import ManageUserPage from "./app/manage/users/ManageUserPage";
 import ManageDashboardPage from "./app/manage/dashboard/ManageDashboardPage";
 import RegistrationPage from "./app/registration/RegistrationPage";
 import LoadingPage from "./lib/loading/loadingPage";
+import SignupPage from "./app/login/SignupPage";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter(
       element: <LoginPage />,
     },
     {
+      path: "/signup",
+      element: <SignupPage />,
+    },
+    {
       path: "/registration",
       element: <RegistrationPage />,
     },
@@ -34,11 +39,21 @@ const router = createBrowserRouter(
       children: [
         {
           path: "/manage",
-          element: <ProtectedRoute element={<ManageDashboardPage />} isAuthenticated={isAuthenticated} />,
+          element: (
+            <ProtectedRoute
+              element={<ManageDashboardPage />}
+              isAuthenticated={isAuthenticated}
+            />
+          ),
         },
         {
           path: "/manage/user",
-          element: <ProtectedRoute element={<ManageUserPage />} isAuthenticated={isAuthenticated} />,
+          element: (
+            <ProtectedRoute
+              element={<ManageUserPage />}
+              isAuthenticated={isAuthenticated}
+            />
+          ),
         },
       ],
     },
@@ -55,5 +70,11 @@ const router = createBrowserRouter(
 );
 
 export const RouteHandler = () => {
-  return <RouterProvider router={router} future={{ v7_startTransition: true }} fallbackElement={<LoadingPage />} />;
+  return (
+    <RouterProvider
+      router={router}
+      future={{ v7_startTransition: true }}
+      fallbackElement={<LoadingPage />}
+    />
+  );
 };
