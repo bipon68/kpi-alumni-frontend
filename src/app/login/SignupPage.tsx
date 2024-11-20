@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 const SignupPage = () => {
   const options = [
-    { value: " ", label: "Select your department " },
-    { value: "option2", label: "Civil" },
-    { value: "option3", label: "Computer" },
-    { value: "option2", label: "Power " },
-    { value: "option3", label: "Mechanical " },
-    { value: "option2", label: "Electronics " },
-    { value: "option3", label: "Electrical " },
+    { value: "1 ", label: "Select your department " },
+    { value: "2", label: "Civil" },
+    { value: "3", label: "Computer" },
+    { value: "4", label: "Power " },
+    { value: "5", label: "Mechanical " },
+    { value: "6", label: "Electronics " },
+    { value: "7", label: "Electrical " },
   ];
 
   const [selectedOption, setSelectedOption] = useState<string>("option1");
