@@ -8,6 +8,7 @@ import ManageDashboardPage from "./app/manage/dashboard/ManageDashboardPage";
 import RegistrationPage from "./app/registration/RegistrationPage";
 import LoadingPage from "./lib/loading/loadingPage";
 import SignupPage from "./app/login/SignupPage";
+import { ToastContainer } from "react-toastify";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
@@ -39,21 +40,11 @@ const router = createBrowserRouter(
       children: [
         {
           path: "/manage",
-          element: (
-            <ProtectedRoute
-              element={<ManageDashboardPage />}
-              isAuthenticated={isAuthenticated}
-            />
-          ),
+          element: <ProtectedRoute element={<ManageDashboardPage />} isAuthenticated={isAuthenticated} />,
         },
         {
           path: "/manage/user",
-          element: (
-            <ProtectedRoute
-              element={<ManageUserPage />}
-              isAuthenticated={isAuthenticated}
-            />
-          ),
+          element: <ProtectedRoute element={<ManageUserPage />} isAuthenticated={isAuthenticated} />,
         },
       ],
     },
@@ -71,10 +62,16 @@ const router = createBrowserRouter(
 
 export const RouteHandler = () => {
   return (
-    <RouterProvider
-      router={router}
-      future={{ v7_startTransition: true }}
-      fallbackElement={<LoadingPage />}
-    />
+    <>
+      <RouterProvider router={router} future={{ v7_startTransition: true }} fallbackElement={<LoadingPage />} />
+      <ToastContainer
+        theme="light"
+        pauseOnHover
+        position="bottom-left"
+        autoClose={5000}
+        newestOnTop={true}
+        closeOnClick
+      />
+    </>
   );
 };

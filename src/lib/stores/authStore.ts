@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { signInWithPopup, signOut, User } from "firebase/auth";
 import { firebaseAuth, githubProvider, googleProvider } from "../google/firebase";
+import { toast } from "react-toastify";
 
 interface AuthState {
   user: User | null;
@@ -15,7 +16,7 @@ const useAuthStore = create<AuthState>((set) => ({
   loading: false,
   loginWithGoogle: async () => {
     set({ loading: true });
-
+    toast.info("Logging in with Google...");
     try {
       const userCredential = await signInWithPopup(firebaseAuth, googleProvider);
       set({ user: userCredential.user, loading: false });
@@ -26,7 +27,7 @@ const useAuthStore = create<AuthState>((set) => ({
   },
   loginWithGitHub: async () => {
     set({ loading: true });
-
+    toast.info("Logging in with Github...");
     try {
       const userCredential = await signInWithPopup(firebaseAuth, githubProvider);
       set({ user: userCredential.user, loading: false });
