@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { signInWithEmailAndPassword, signInWithPopup, signOut, User } from "firebase/auth";
 import { firebaseAuth, githubProvider, googleProvider } from "../google/firebase";
 import { toast } from "react-toastify";
+import AxiosApi from "@/utils/axios";
 
 interface AuthState {
   user: User | null;
@@ -58,6 +59,13 @@ const useAuthStore = create<AuthState>((set) => ({
     }
 
     try {
+      const loginInfo = await AxiosApi.setPath("api/v1/login").post({ type: "email", email: email });
+
+      if (loginInfo.data.Error !== 0) {
+        toast.error(loginInfo.data.Message);
+        return;
+      }
+
       const userCredential = await signInWithEmailAndPassword(firebaseAuth, email, password);
       set({ user: userCredential.user, loading: false });
     } catch (error) {
