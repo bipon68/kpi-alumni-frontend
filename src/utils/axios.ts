@@ -18,7 +18,9 @@ class AxiosAuth {
 
   setHeaders = (): this => {
     axios.defaults.headers.common["Content-Type"] = "application/json";
-    axios.defaults.headers.common["Init-Id "] = localStorage.getItem("InitId") || "";
+    axios.defaults.headers.common["Init-Id"] = localStorage.getItem("InitId") || "";
+    axios.defaults.headers.common["User-Uid"] = localStorage.getItem("UserUid") || "";
+    axios.defaults.headers.common["Refresh-Token"] = localStorage.getItem("UserUid") || "";
     axios.defaults.headers.common["Client-Time"] = new Date().toISOString();
     axios.defaults.headers.common["Authorization"] = localStorage.getItem("token") || "";
     return this;
