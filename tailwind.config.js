@@ -68,6 +68,9 @@ export default {
           100: "var(--secondary-100)",
           50: "var(--secondary-50)",
         },
+        "white-100": "var(--white-100)",
+        error: "var(--error)",
+        success: "var(--success)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
