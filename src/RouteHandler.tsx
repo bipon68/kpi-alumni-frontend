@@ -9,6 +9,8 @@ import RegistrationPage from "./app/registration/RegistrationPage";
 import LoadingPage from "./lib/loading/loadingPage";
 import SignupPage from "./app/login/SignupPage";
 import { ToastContainer } from "react-toastify";
+import useInitStore from "./lib/stores/initStore";
+import { useEffect } from "react";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
@@ -61,6 +63,13 @@ const router = createBrowserRouter(
 );
 
 export const RouteHandler = () => {
+  const { loadInitInfo } = useInitStore();
+
+  useEffect(() => {
+    (async () => {
+      await loadInitInfo();
+    })();
+  }, [loadInitInfo]);
   return (
     <>
       <RouterProvider router={router} future={{ v7_startTransition: true }} fallbackElement={<LoadingPage />} />

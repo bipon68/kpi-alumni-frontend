@@ -20,9 +20,15 @@ const useAuthStore = create<AuthState>((set) => ({
   loginWithGoogle: async () => {
     set({ loading: true });
     toast.info("Logging in with Google...", { hideProgressBar: true, autoClose: 3000 });
+
+    googleProvider.addScope("https://www.googleapis.com/auth/userinfo.profile");
+    googleProvider.addScope("https://www.googleapis.com/auth/userinfo.email");
+    googleProvider.addScope("profile");
+    googleProvider.addScope("email");
+    googleProvider.addScope("openid");
     try {
-      const userCredential = await signInWithPopup(firebaseAuth, googleProvider);
-      set({ user: userCredential.user, loading: false });
+      const { user } = await signInWithPopup(firebaseAuth, googleProvider);
+      set({ user, loading: false });
     } catch (error) {
       set({ loading: false });
       throw new Error("Google login error: " + error);
@@ -32,9 +38,11 @@ const useAuthStore = create<AuthState>((set) => ({
   loginWithGitHub: async () => {
     set({ loading: true });
     toast.info("Logging in with Github...", { hideProgressBar: true, autoClose: 3000 });
+
+    githubProvider.addScope("user:email");
     try {
-      const userCredential = await signInWithPopup(firebaseAuth, githubProvider);
-      set({ user: userCredential.user, loading: false });
+      const { user } = await signInWithPopup(firebaseAuth, githubProvider);
+      set({ user, loading: false });
     } catch (error) {
       set({ loading: false });
       throw new Error("Github login error: " + error);
@@ -66,8 +74,8 @@ const useAuthStore = create<AuthState>((set) => ({
         return;
       }
 
-      const userCredential = await signInWithEmailAndPassword(firebaseAuth, email, password);
-      set({ user: userCredential.user, loading: false });
+      const { user } = await signInWithEmailAndPassword(firebaseAuth, email, password);
+      set({ user, loading: false });
     } catch (error) {
       set({ loading: false });
       throw new Error("Email and Password login error: " + error);

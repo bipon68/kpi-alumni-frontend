@@ -8,5 +8,8 @@
   "editor.insertSpaces": true,
   "editor.indentSize": "tabSize",
   "editor.wordWrap": "on",
-  "editor.wordWrapColumn": 100
+  "editor.wordWrapColumn": 100,
+  "editor.lineHeight": 2,
+  "editor.fontFamily": "Consolas, 'Courier New', monospace",
+  "editor.fontSize": 14
 }
