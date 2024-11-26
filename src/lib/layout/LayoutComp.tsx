@@ -9,7 +9,11 @@ const LayoutComp: FC = (): React.ReactElement => {
       <HeaderAdminWeb />
       <main className="flex">
         <SidebarAdminWeb />
-        <div className="page-content">{<Outlet />}</div>
+        <div className="page-content h-[calc(100vh_-_70px)]  w-full p-2 md:p-5 bg-[#FAFCFE]">
+          <div className="page-content-inner h-full md:h-[calc(100vh_-_110px)] print:h-full bg-white overflow-x-auto p-2 md:p-5 shadow-base rounded-lg md:rounded-3xl">
+            {<Outlet />}
+          </div>
+        </div>
       </main>
     </div>
   );
