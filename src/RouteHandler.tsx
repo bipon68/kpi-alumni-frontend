@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import useInitStore from "./lib/stores/initStore";
 import { useEffect } from "react";
 import LayoutComp from "./lib/layout/LayoutComp";
+import ManageEventPage from "./app/manage/events/ManageEventPage";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
@@ -38,6 +39,14 @@ const router = createBrowserRouter(
         {
           path: "/manage",
           element: <ProtectedRoute element={<ManageDashboardPage />} isAuthenticated={isAuthenticated} />,
+        },
+        {
+          path: "/manage/dashboard",
+          element: <ProtectedRoute element={<ManageDashboardPage />} isAuthenticated={isAuthenticated} />,
+        },
+        {
+          path: "/manage/event",
+          element: <ProtectedRoute element={<ManageEventPage />} isAuthenticated={isAuthenticated} />,
         },
         {
           path: "/manage/user",
