@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./app/home";
 import LoginPage from "@/app/login/LoginPage";
-import AdminLayout from "./lib/auth/adminLayout";
 import ProtectedRoute from "./lib/auth/protectRoute";
 import ManageUserPage from "./app/manage/users/ManageUserPage";
 import ManageDashboardPage from "./app/manage/dashboard/ManageDashboardPage";
@@ -10,6 +9,7 @@ import SignupPage from "./app/login/SignupPage";
 import { ToastContainer } from "react-toastify";
 import useInitStore from "./lib/stores/initStore";
 import { useEffect } from "react";
+import LayoutComp from "./lib/layout/LayoutComp";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
@@ -33,7 +33,7 @@ const router = createBrowserRouter(
     },
     {
       path: "/manage",
-      element: <AdminLayout />,
+      element: <LayoutComp />,
       children: [
         {
           path: "/manage",
