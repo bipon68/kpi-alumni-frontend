@@ -42,7 +42,6 @@ const useRegistrationStore = create<IRegistration>((set) => ({
   regWithGitHub: async () => {
     set({ loading: true });
     toast.info("Registering through Github...");
-
     githubProvider.addScope("user:email");
     try {
       const { user } = await signInWithPopup(firebaseAuth, githubProvider);
