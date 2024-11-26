@@ -14,7 +14,7 @@ const useInitStore = create<InitState>((set) => ({
     set({ loading: true });
 
     try {
-      const { data } = await AxiosApi.setPath("/api/v1/init/info").get();
+      const { data } = await AxiosApi.setPath("/api/v1/init/info/").get();
       localStorage.setItem("init-id", data?.data?.initId);
       set({ initInfo: data, loading: false });
     } catch (ex) {

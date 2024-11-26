@@ -5,7 +5,6 @@ import AdminLayout from "./lib/auth/adminLayout";
 import ProtectedRoute from "./lib/auth/protectRoute";
 import ManageUserPage from "./app/manage/users/ManageUserPage";
 import ManageDashboardPage from "./app/manage/dashboard/ManageDashboardPage";
-import RegistrationPage from "./app/registration/RegistrationPage";
 import LoadingPage from "./lib/loading/loadingPage";
 import SignupPage from "./app/login/SignupPage";
 import { ToastContainer } from "react-toastify";
@@ -31,10 +30,6 @@ const router = createBrowserRouter(
     {
       path: "/signup",
       element: <SignupPage />,
-    },
-    {
-      path: "/registration",
-      element: <RegistrationPage />,
     },
     {
       path: "/manage",
