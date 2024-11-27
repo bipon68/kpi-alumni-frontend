@@ -1,22 +1,103 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { Button } from "@/lib/ui/button";
+import { Checkbox } from "@/lib/ui/checkbox";
+import { Input } from "@/lib/ui/input";
 import { Link } from "react-router-dom";
+import useRegistrationStore from "@/lib/stores/registrationStore";
+
+interface IFormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  repeatPassword: string;
+}
+
+const SignupForm = () => {
+  const { loading, regWithEmailPassword } = useRegistrationStore();
+  const [formData, setFormData] = useState<IFormData>({} as IFormData);
+
+  const handleChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+    const { name, value } = event.target;
+    if (name) {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    regWithEmailPassword(formData);
+  };
+
+  return (
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      <Input
+        type="text"
+        value={formData.firstName}
+        name="firstName"
+        onChange={handleChange}
+        placeholder="First Name"
+        className="bg-white bg-opacity-15 border-gray-300 !text-white placeholder:text-white focus-visible:ring-0"
+      />
+      <Input
+        type="text"
+        value={formData.lastName}
+        name="lastName"
+        onChange={handleChange}
+        placeholder="Last Name"
+        className="bg-white bg-opacity-15 border-gray-300 !text-white placeholder:text-white focus-visible:ring-0"
+      />
+      <Input
+        type="email"
+        value={formData.email}
+        name="email"
+        onChange={handleChange}
+        placeholder="Email"
+        className="bg-white bg-opacity-15 border-gray-300 !text-white placeholder:text-white focus-visible:ring-0"
+      />
+      <Input
+        type="password"
+        value={formData.password}
+        name="password"
+        onChange={handleChange}
+        placeholder="Password"
+        className="bg-white bg-opacity-15 border-gray-300 !text-white placeholder:text-white focus-visible:ring-0"
+      />
+      <Input
+        type="password"
+        value={formData.repeatPassword}
+        name="repeatPassword"
+        onChange={handleChange}
+        placeholder="Confirm Password "
+        className="bg-white bg-opacity-15 border-gray-300 !text-white placeholder:text-white focus-visible:ring-0"
+      />
+      <div className="text-white text-sm flex items-center">
+        <Checkbox id="tnc" className="" />
+        &nbsp;&nbsp;
+        <label htmlFor="tnc" className="text-white-100">
+          I agree to the terms and conditions
+        </label>
+      </div>
+      <Button
+        disabled={loading}
+        type="submit"
+        className="bg-white text-secondary text-base py-1 hover:bg-secondary-100 transition-[background]"
+      >
+        Signup
+      </Button>
+      <div className=" text-center !font-normal text-white ">
+        You have an account?&nbsp;
+        <Link to="/login" className="font-semibold rounded-md py-2 text-blue-700 underline">
+          Login
+        </Link>
+      </div>
+    </form>
+  );
+};
 
 const SignupPage = () => {
-  const options = [
-    { value: "1 ", label: "Select your department " },
-    { value: "2", label: "Civil" },
-    { value: "3", label: "Computer" },
-    { value: "4", label: "Power " },
-    { value: "5", label: "Mechanical " },
-    { value: "6", label: "Electronics " },
-    { value: "7", label: "Electrical " },
-  ];
+  const { regWithGitHub, regWithGoogle, loading } = useRegistrationStore();
 
-  const [selectedOption, setSelectedOption] = useState<string>("option1");
-
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(event.target.value);
-  };
   return (
     <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-300 relative overflow-hidden">
       {/* Floating Squares */}
@@ -37,111 +118,31 @@ const SignupPage = () => {
       </ul>
 
       {/* Login Container */}
-      <div className="bg-white bg-opacity-5 shadow-lg rounded-lg p-8 w-auto relative">
-        <header className="flex justify-center gap-10 items-center mb-16">
-          <img
-            src="/src/assets/images/kpi-alumni-logo.png"
-            alt="Logo"
-            className="w-12 h-12"
-          />
+      <div className="bg-white w-104 bg-opacity-5 shadow-lg rounded-lg p-8 relative">
+        <header className="flex justify-center gap-10 items-center mb-4">
+          <img src="/src/assets/images/kpi-alumni-logo.png" alt="Logo" className="w-12 h-12" />
           <h1 className="text-[40px] font-semibold text-white">Signup</h1>
         </header>
-        <form className="flex  gap-6 ">
-          <div className="w-full flex flex-col gap-6 pr-6 mb-30 border-r">
-            <div className="flex gap-3">
-              <input
-                type="text"
-                placeholder="First Name"
-                className="border-b bg-white outline-none bg-opacity-15 border-gray-300 rounded-md p-3 !text-white placeholder:text-white"
-              />
-              <input
-                type="text"
-                placeholder="Last Name"
-                className="border-b bg-white outline-none bg-opacity-15 border-gray-300 rounded-md p-3 !text-white placeholder:text-white"
-              />
-            </div>
-            <input
-              type="number"
-              placeholder="Phone Number"
-              className="border-b bg-white outline-none bg-opacity-15 border-gray-300 rounded-md p-3 !text-white placeholder:text-white"
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              className="border-b bg-white outline-none bg-opacity-15 border-gray-300 rounded-md p-3 !text-white placeholder:text-white"
-            />{" "}
-            <input
-              type="text"
-              placeholder="Date of Birth"
-              className="border-b bg-white outline-none bg-opacity-15 border-gray-300 rounded-md p-3 !text-white placeholder:text-white"
-            />{" "}
-            <div className="flex gap-3">
-              {" "}
-              <input
-                type="password"
-                placeholder="Password"
-                className="border-b bg-white outline-none bg-opacity-15 border-gray-300 rounded-md p-3 !text-white placeholder:text-white"
-              />
-              <input
-                type="password"
-                placeholder="Confirm Password "
-                className="border-b bg-white outline-none bg-opacity-15 border-gray-300 rounded-md p-3 !text-white placeholder:text-white"
-              />
-            </div>
-          </div>
-          <div className=" w-full flex flex-col gap-6">
-            <input
-              type="text"
-              placeholder="Session "
-              className="border-b bg-white outline-none bg-opacity-15 border-gray-300 rounded-md p-3 !text-white placeholder:text-white"
-            />
-            <select
-              value={selectedOption}
-              onChange={handleChange}
-              className="form-select text-white outline-none h-10  bg-white bg-opacity-10 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            >
-              {options.map((option) => (
-                <option
-                  key={option.value}
-                  value={option.value}
-                  className="text-black"
-                >
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <input
-              type="text"
-              placeholder="Passing Year"
-              className="border-b bg-white outline-none bg-opacity-15 border-gray-300 rounded-md p-3 !text-white placeholder:text-white"
-            />
-            <input
-              type="text"
-              placeholder="Current Position"
-              className="border-b bg-white outline-none bg-opacity-15 border-gray-300 rounded-md p-3 !text-white placeholder:text-white"
-            />
-            <div className="text-white text-sx mt-10">
-              <input type="checkbox" className="outline-none bg-transparent" />{" "}
-              I do accept the Terms and Conditions of your site.
-            </div>
-            <button
-              type="submit"
-              className="bg-white text-2xl font-semibold rounded-md py-2 text-blue-500 transition"
-            >
-              Signup
-            </button>
-            <div className=" text-center !font-normal text-white ">
-              You have an account?
-              <Link
-                to="/login"
-                className="font-semibold rounded-md py-2 text-blue-700 underline"
-              >
-                {" "}
-                Login
-              </Link>
-            </div>
-          </div>
-        </form>
+        <SignupForm />
+
+        <div className="flex items-center justify-center gap-2">
+          <div className="w-1/4 h-0.5 bg-white bg-opacity-50"></div>
+          <span className="text-white">or</span>
+          <div className="w-1/4 h-0.5 bg-white bg-opacity-50"></div>
+        </div>
+
+        {/* Login With Google Button */}
+        <div className="flex flex-col gap-3 mt-2">
+          <Button onClick={regWithGoogle} disabled={loading} className="bg-secondary-200 text-primary">
+            <span>G</span>
+            <span>Sign Up with Google</span>
+          </Button>
+          {/* Login With Github Button */}
+          <Button onClick={regWithGitHub} disabled={loading} className="bg-secondary-200 text-primary">
+            <span>G</span>
+            <span>Sign Up with Github</span>
+          </Button>
+        </div>
       </div>
 
       <style>{`
