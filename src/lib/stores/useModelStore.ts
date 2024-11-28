@@ -7,7 +7,7 @@ interface IModelControl {
   closeModel: () => void;
 }
 
-const useModelControlStore = create<IModelControl>((set) => ({
+const useModelStore = create<IModelControl>((set) => ({
   modalName: "",
   modalData: null,
   openModel: (name: string, data?: any) => {
@@ -17,4 +17,4 @@ const useModelControlStore = create<IModelControl>((set) => ({
     set({ modalName: "", modalData: null });
   },
 }));
-export default useModelControlStore;
+export default useModelStore;
