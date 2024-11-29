@@ -6,16 +6,22 @@ import { Link } from "react-router-dom";
 import useRegistrationStore from "@/lib/stores/registrationStore";
 
 interface IFormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  repeatPassword: string;
+  FullName: string;
+  Email: string;
+  Password1: string;
+  Password2: string;
+  AcceptTc: boolean;
 }
 
 const SignupForm = () => {
   const { loading, regWithEmailPassword } = useRegistrationStore();
-  const [formData, setFormData] = useState<IFormData>({} as IFormData);
+  const [formData, setFormData] = useState<IFormData>({
+    FullName: "",
+    Email: "",
+    Password1: "",
+    Password2: "",
+    AcceptTc: false,
+  });
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -33,46 +39,44 @@ const SignupForm = () => {
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <Input
         type="text"
-        value={formData.firstName}
-        name="firstName"
+        value={formData.FullName}
+        name="FullName"
         onChange={handleChange}
-        placeholder="First Name"
-        className="bg-white bg-opacity-15 border-gray-300 !text-white placeholder:text-white focus-visible:ring-0"
-      />
-      <Input
-        type="text"
-        value={formData.lastName}
-        name="lastName"
-        onChange={handleChange}
-        placeholder="Last Name"
+        placeholder="Full Name"
         className="bg-white bg-opacity-15 border-gray-300 !text-white placeholder:text-white focus-visible:ring-0"
       />
       <Input
         type="email"
-        value={formData.email}
-        name="email"
+        value={formData.Email}
+        name="Email"
         onChange={handleChange}
         placeholder="Email"
         className="bg-white bg-opacity-15 border-gray-300 !text-white placeholder:text-white focus-visible:ring-0"
       />
       <Input
         type="password"
-        value={formData.password}
-        name="password"
+        value={formData.Password1}
+        name="Password1"
         onChange={handleChange}
         placeholder="Password"
         className="bg-white bg-opacity-15 border-gray-300 !text-white placeholder:text-white focus-visible:ring-0"
       />
       <Input
         type="password"
-        value={formData.repeatPassword}
-        name="repeatPassword"
+        value={formData.Password2}
+        name="Password2"
         onChange={handleChange}
         placeholder="Confirm Password "
         className="bg-white bg-opacity-15 border-gray-300 !text-white placeholder:text-white focus-visible:ring-0"
       />
       <div className="text-white text-sm flex items-center">
-        <Checkbox id="tnc" className="" />
+        <Checkbox
+          id="tnc"
+          className=""
+          onChange={() => {
+            setFormData((prev) => ({ ...prev, AcceptTc: !prev.AcceptTc }));
+          }}
+        />
         &nbsp;&nbsp;
         <label htmlFor="tnc" className="text-white-100">
           I agree to the terms and conditions
