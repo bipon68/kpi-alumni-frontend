@@ -80,3 +80,17 @@ export const users = [
     image: "https://randomuser.me/api/portraits/women/5.jpg",
   },
 ];
+export const sections = [
+  {
+    title: "Computer Science and Engineering",
+    subtitle: "Khulna Polytechnic Institute",
+  },
+  {
+    title: "Electrical and Electronics Engineering",
+    subtitle: "Khulna Polytechnic Institute",
+  },
+  {
+    title: "Mechanical Engineering",
+    subtitle: "Khulna Polytechnic Institute",
+  },
+];

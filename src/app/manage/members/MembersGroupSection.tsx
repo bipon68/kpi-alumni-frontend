@@ -5,7 +5,7 @@ import MembersSearch from "./MembersSearch";
 
 const MembersGroupsSections = () => {
   return (
-    <div>
+    <div className="max-w-7xl mx-auto p-4 mt-4 rounded-xl h-full">
       <MembersSearch />
       <div className=" flex w-full items-center justify-between">
         <h1 className="text-xl font-bold text-secondary ">127 Users</h1>
