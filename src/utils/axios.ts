@@ -65,21 +65,21 @@ class AxiosAuth {
     return response;
   };
 
-  post = async (params: Record<string, unknown>, options?: AxiosRequestConfig): Promise<AxiosResponse> => {
+  post = async (params: object, options?: AxiosRequestConfig): Promise<AxiosResponse> => {
     this.setHeaders();
 
     const response = await axios.post(this.url, params, options);
     return response;
   };
 
-  put = async (params: Record<string, unknown>, options?: AxiosRequestConfig): Promise<AxiosResponse> => {
+  put = async (params: object, options?: AxiosRequestConfig): Promise<AxiosResponse> => {
     this.setHeaders();
 
     const response = await axios.put(this.url, params, options);
     return response;
   };
 
-  patch = async (params: Record<string, unknown>, options?: AxiosRequestConfig): Promise<AxiosResponse> => {
+  patch = async (params: object, options?: AxiosRequestConfig): Promise<AxiosResponse> => {
     this.setHeaders();
 
     const response = await axios.patch(this.url, params, options);
