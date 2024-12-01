@@ -3,19 +3,62 @@ import { signInWithEmailAndPassword, signInWithPopup, signOut, User } from "fire
 import { firebaseAuth, githubProvider, googleProvider } from "../google/firebase";
 import { toast } from "react-toastify";
 import AxiosApi from "@/utils/axios";
+import axios from "axios";
+import { getApiUrl } from "@/utils/env";
 
 interface AuthState {
   user: User | null;
   loading: boolean;
+  verifyLogin: (user: User) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
   loginWithGitHub: () => Promise<void>;
   loginWithEmailPassword: (email: string, password: string) => Promise<void>;
+  logginIn: (user: User) => Promise<void>;
   logout: () => Promise<void>;
 }
 
 const useAuthStore = create<AuthState>((set) => ({
   user: null,
   loading: false,
+
+  //--Verify login
+  verifyLogin: async (user: User) => {
+    set({ loading: true });
+    const { uid, refreshToken } = user;
+    const headers = {
+      "content-type": "application/json",
+      "refresh-token": `${refreshToken}`,
+      "user-uid": `${uid}`,
+    };
+    try {
+      const { data }: { data: any } = await axios.get(`${getApiUrl()}/api/v1/login/verify`, { headers });
+
+      if (data.Error !== 0) {
+        set({ loading: false });
+        throw new Error(data.Message);
+      }
+      return data;
+    } catch (ex) {
+      set({ loading: false });
+      throw ex;
+    }
+  },
+
+  logginIn: async (user: User) => {
+    const { uid, refreshToken } = user || {};
+    const headers = {
+      "content-type": "application/json",
+      "refresh-token": `${refreshToken}`,
+      "user-uid": `${uid}`,
+    };
+    const { data } = await axios.post(`${getApiUrl()}/auth/logging-in`, { id: Math.random() }, { headers });
+
+    if (data.error) {
+      const err = new Error(data.message);
+      err.name = data.referenceName;
+      throw err;
+    }
+  },
   //--Login with Google
   loginWithGoogle: async () => {
     set({ loading: true });
