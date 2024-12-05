@@ -11,6 +11,10 @@ import useInitStore from "./lib/stores/initStore";
 import { useEffect } from "react";
 import LayoutComp from "./lib/layout/LayoutComp";
 import ManageEventPage from "./app/manage/events/ManageEventPage";
+import MembersPage from "./app/manage/members/MembersPage";
+import JobsPage from "./app/manage/jobs/JobsPage";
+import MembersGroupsSections from "./app/manage/members/MembersGroupSection";
+import EventPage from "./app/events/EventPage";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
@@ -33,24 +37,60 @@ const router = createBrowserRouter(
       element: <SignupPage />,
     },
     {
+      path: "/members",
+      element: <MembersPage />,
+    },
+    {
+      path: "/MembersGroupSection",
+      element: <MembersGroupsSections />,
+    },
+    {
+      path: "/jobs",
+      element: <JobsPage />,
+    },
+    {
+      path: "/events",
+      element: <EventPage />,
+    },
+    {
       path: "/manage",
       element: <LayoutComp />,
       children: [
         {
           path: "/manage",
-          element: <ProtectedRoute element={<ManageDashboardPage />} isAuthenticated={isAuthenticated} />,
+          element: (
+            <ProtectedRoute
+              element={<ManageDashboardPage />}
+              isAuthenticated={isAuthenticated}
+            />
+          ),
         },
         {
           path: "/manage/dashboard",
-          element: <ProtectedRoute element={<ManageDashboardPage />} isAuthenticated={isAuthenticated} />,
+          element: (
+            <ProtectedRoute
+              element={<ManageDashboardPage />}
+              isAuthenticated={isAuthenticated}
+            />
+          ),
         },
         {
           path: "/manage/event",
-          element: <ProtectedRoute element={<ManageEventPage />} isAuthenticated={isAuthenticated} />,
+          element: (
+            <ProtectedRoute
+              element={<ManageEventPage />}
+              isAuthenticated={isAuthenticated}
+            />
+          ),
         },
         {
           path: "/manage/user",
-          element: <ProtectedRoute element={<ManageUserPage />} isAuthenticated={isAuthenticated} />,
+          element: (
+            <ProtectedRoute
+              element={<ManageUserPage />}
+              isAuthenticated={isAuthenticated}
+            />
+          ),
         },
       ],
     },
@@ -76,7 +116,11 @@ export const RouteHandler = () => {
   }, [loadInitInfo]);
   return (
     <>
-      <RouterProvider router={router} future={{ v7_startTransition: true }} fallbackElement={<LoadingPage />} />
+      <RouterProvider
+        router={router}
+        future={{ v7_startTransition: true }}
+        fallbackElement={<LoadingPage />}
+      />
       <ToastContainer
         theme="light"
         pauseOnHover
