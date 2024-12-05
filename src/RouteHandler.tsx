@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./app/home";
 import LoginPage from "@/app/login/LoginPage";
 import ProtectedRoute from "./lib/auth/protectRoute";
-import ManageUserPage from "./app/manage/users/ManageUserPage";
 import ManageDashboardPage from "./app/manage/dashboard/ManageDashboardPage";
 import LoadingPage from "./lib/loading/loadingPage";
 import SignupPage from "./app/login/SignupPage";
@@ -10,11 +9,13 @@ import { ToastContainer } from "react-toastify";
 import useInitStore from "./lib/stores/initStore";
 import { useEffect } from "react";
 import LayoutComp from "./lib/layout/LayoutComp";
-import ManageEventPage from "./app/manage/events/ManageEventPage";
-import MembersPage from "./app/manage/members/MembersPage";
-import JobsPage from "./app/manage/jobs/JobsPage";
-import MembersGroupsSections from "./app/manage/members/MembersGroupSection";
+import AdmEventPage from "./app/manage/events/AdmEventPage";
+import MembersPage from "./app/members/MembersPage";
+import MembersGroupsSections from "./app/members/MembersGroupSection";
 import EventPage from "./app/events/EventPage";
+import AdmMembersPage from "./app/manage/members/AdmMembersPage";
+import AdmJobsPage from "./app/manage/jobs/AdmJobsPage";
+import AdmManageUserPage from "./app/manage/users/AdmManageUserPage";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
@@ -43,10 +44,6 @@ const router = createBrowserRouter(
     {
       path: "/MembersGroupSection",
       element: <MembersGroupsSections />,
-    },
-    {
-      path: "/jobs",
-      element: <JobsPage />,
     },
     {
       path: "/events",
@@ -78,7 +75,7 @@ const router = createBrowserRouter(
           path: "/manage/event",
           element: (
             <ProtectedRoute
-              element={<ManageEventPage />}
+              element={<AdmEventPage />}
               isAuthenticated={isAuthenticated}
             />
           ),
@@ -87,10 +84,26 @@ const router = createBrowserRouter(
           path: "/manage/user",
           element: (
             <ProtectedRoute
-              element={<ManageUserPage />}
+              element={<AdmManageUserPage />}
               isAuthenticated={isAuthenticated}
             />
           ),
+        },
+        {
+          path: "/manage/jobs",
+          element: (
+            <ProtectedRoute
+              element={<AdmJobsPage />}
+              isAuthenticated={isAuthenticated}
+            />)
+        },
+        {
+          path: "/manage/members",
+          element: (
+            <ProtectedRoute
+              element={<AdmMembersPage />}
+              isAuthenticated={isAuthenticated}
+            />)
         },
       ],
     },

@@ -3,7 +3,7 @@ import React from "react";
 import TableHeaderComp from "./table-comps/TableHeaderComp";
 import TableBodyComp from "./table-comps/TableBodyComp";
 
-const ManageEventPageTableSection: React.FC = () => {
+const AdmEventPageTableSection: React.FC = () => {
     return (
         <div className="mt-3">
             <Table>
@@ -14,4 +14,4 @@ const ManageEventPageTableSection: React.FC = () => {
     );
 };
 
-export default ManageEventPageTableSection;
+export default AdmEventPageTableSection;
