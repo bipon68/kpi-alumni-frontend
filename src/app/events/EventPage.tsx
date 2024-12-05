@@ -1,6 +1,10 @@
+import EventPageHeaderSection from "./components/EventPageHeaderSection"
+
 const EventPage = () => {
     return (
-        <div>EventPage</div>
+        <div>
+            <EventPageHeaderSection />
+        </div>
     )
 }
 
