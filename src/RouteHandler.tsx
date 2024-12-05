@@ -14,6 +14,7 @@ import ManageEventPage from "./app/manage/events/ManageEventPage";
 import MembersPage from "./app/manage/members/MembersPage";
 import JobsPage from "./app/manage/jobs/JobsPage";
 import MembersGroupsSections from "./app/manage/members/MembersGroupSection";
+import EventPage from "./app/events/EventPage";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
@@ -46,6 +47,10 @@ const router = createBrowserRouter(
     {
       path: "/jobs",
       element: <JobsPage />,
+    },
+    {
+      path: "/events",
+      element: <EventPage />,
     },
     {
       path: "/manage",
