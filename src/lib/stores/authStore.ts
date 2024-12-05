@@ -9,6 +9,8 @@ import { getApiUrl } from "@/utils/env";
 
 interface AuthState {
   user: User | null;
+  isAuthenticated: boolean;
+  setIsAuthenticated: (isAuthenticated: boolean) => void;
   userInfo: any;
   setUserInfo: (userInfo: any) => void;
   loading: boolean;
@@ -19,10 +21,15 @@ interface AuthState {
   logout: () => Promise<void>;
 }
 
+import useModelStore from "./useModelStore";
+
 const useAuthStore = create<AuthState>((set) => ({
   user: null,
   loading: false,
-
+  isAuthenticated: false,
+  setIsAuthenticated: (isAuthenticated) => {
+    set({ isAuthenticated });
+  },
   //--Set User Info
   userInfo: {},
   setUserInfo: (userInfo) => {
@@ -40,8 +47,10 @@ const useAuthStore = create<AuthState>((set) => ({
       const { data }: { data: any } = await axios.get(`${getApiUrl()}/api/v1/login/verify`, { headers });
 
       if (data.error !== 0) {
+        set({ isAuthenticated: false });
         throw new Error(data.message);
       }
+      set({ userInfo: data, loading: false, isAuthenticated: true });
       return data;
     } catch (ex: any) {
       throw ex;
@@ -69,11 +78,18 @@ const useAuthStore = create<AuthState>((set) => ({
           };
           axios
             .post(`${getApiUrl()}/api/v1/login/check-user-info`, {}, { headers })
-            .then((res) => {
-              console.log("Check user info: ", res.data);
+            .then(({ data }) => {
+              if (data.error === 0) {
+                localStorage.setItem("refresh-token", user.refreshToken);
+                localStorage.setItem("user-uid", user.uid);
+                set({ user: user, loading: false });
+              } else {
+                set({ user: user, loading: false });
+                useModelStore.getInitialState().openModel(data.reference);
+              }
             })
             .catch((ex: any) => {
-              console.log("Error in check user info: ", ex.message);
+              toast.error(ex.message);
             });
         }
       })
@@ -84,6 +100,7 @@ const useAuthStore = create<AuthState>((set) => ({
         set({ loading: false });
       });
   },
+
   //--Login with Github
   loginWithGitHub: async () => {
     set({ loading: true });

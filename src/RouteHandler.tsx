@@ -6,7 +6,7 @@ import ManageUserPage from "./app/manage/users/ManageUserPage";
 import ManageDashboardPage from "./app/manage/dashboard/ManageDashboardPage";
 import LoadingPage from "./lib/loading/loadingPage";
 import SignupPage from "./app/login/SignupPage";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import useInitStore from "./lib/stores/initStore";
 import { useEffect } from "react";
 import LayoutComp from "./lib/layout/LayoutComp";
@@ -78,13 +78,10 @@ export const RouteHandler = () => {
   }, [loadInitInfo]);
 
   useEffect(() => {
-    verifyLogin()
-      .then((data) => {
-        setUserInfo(data);
-      })
-      .catch((ex: any) => {
-        toast.error(ex.message);
-      });
+    (async () => {
+      const data = await verifyLogin();
+      setUserInfo(data);
+    })();
   }, [setUserInfo, verifyLogin]);
   return (
     <>
@@ -94,7 +91,7 @@ export const RouteHandler = () => {
         pauseOnHover
         position="bottom-left"
         autoClose={5000}
-        newestOnTop={true}
+        newestOnTop={false}
         closeOnClick
       />
     </>

@@ -3,6 +3,7 @@ import { Button } from "@/lib/ui/button";
 import { Input } from "@/lib/ui/input";
 import { FC } from "react";
 import { Link } from "react-router-dom";
+import RegistrationModal from "./RegistrationModal";
 
 const FormSection = () => {
   const { loginWithGoogle, loginWithGitHub, loading, userInfo, logout } = useAuthStore();
@@ -63,61 +64,16 @@ const FormSection = () => {
 
 const LoginPage: FC = () => {
   return (
-    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-300 relative overflow-hidden">
-      {/* Floating Squares */}
-      <ul className="absolute w-full h-full flex flex-wrap">
-        {Array.from({ length: 10 }).map((_, i) => (
-          <li
-            key={i}
-            className="w-22 h-22 bg-white bg-opacity-30 rounded-md"
-            style={{
-              position: "absolute",
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animation: `moveSquare ${Math.random() * 5 + 5}s infinite linear`,
-              animationDelay: `${Math.random() * 2}s`,
-            }}
-          ></li>
-        ))}
-      </ul>
-
+    <div className="h-screen flex items-center justify-center bg-white relative overflow-hidden">
       {/* Login Container */}
-      <div className="bg-white bg-opacity-5 shadow-lg rounded-lg p-8 w-[435px] relative">
+      <div className="bg-secondary-700 shadow-lg rounded-lg p-8 w-[435px] relative">
         <header className="flex justify-center gap-10 items-center mb-16">
           <img src="/src/assets/images/kpi-alumni-logo.png" alt="Logo" className="w-12 h-12 " />
           <h1 className="text-[40px] font-semibold text-white">Login</h1>
         </header>
         <FormSection />
       </div>
-
-      <style>{`
-        @keyframes moveSquare {
-          0% {
-            transform: translate(0, 0);
-          }
-          25% {
-            transform: translate(
-              ${Math.random() * 100}%,
-              ${Math.random() * 100}%
-            );
-          }
-          50% {
-            transform: translate(
-              ${Math.random() * 100}%,
-              ${Math.random() * 100}%
-            );
-          }
-          75% {
-            transform: translate(
-              ${Math.random() * 100}%,
-              ${Math.random() * 100}%
-            );
-          }
-          100% {
-            transform: translate(0, 0);
-          }
-        }
-      `}</style>
+      <RegistrationModal />
     </div>
   );
 };
