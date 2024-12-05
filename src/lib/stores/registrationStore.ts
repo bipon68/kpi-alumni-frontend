@@ -1,6 +1,4 @@
 import { create } from "zustand";
-import { firebaseAuth, githubProvider, googleProvider } from "../google/firebase";
-import { signInWithPopup } from "firebase/auth";
 import { toast } from "react-toastify";
 import AxiosApi from "@/utils/axios";
 import { TApiResponse } from "../types/response";
@@ -15,46 +13,11 @@ interface IFormData {
 
 interface IRegistration {
   loading: boolean;
-  regWithGoogle: () => Promise<void>;
-  regWithGitHub: () => Promise<void>;
   regWithEmailPassword: (formData: IFormData) => Promise<void>;
 }
 
 const useRegistrationStore = create<IRegistration>((set) => ({
   loading: false,
-
-  regWithGoogle: async () => {
-    set({ loading: true });
-    toast.info("Registering with Google...");
-
-    googleProvider.addScope("https://www.googleapis.com/auth/userinfo.profile");
-    googleProvider.addScope("https://www.googleapis.com/auth/userinfo.email");
-    googleProvider.addScope("profile");
-    googleProvider.addScope("email");
-    googleProvider.addScope("openid");
-    try {
-      await signInWithPopup(firebaseAuth, googleProvider);
-
-      set({ loading: false });
-    } catch (error) {
-      set({ loading: false });
-      throw new Error("Google login error: " + error);
-    }
-  },
-  regWithGitHub: async () => {
-    set({ loading: true });
-    toast.info("Registering through Github...");
-    githubProvider.addScope("user:email");
-    try {
-      const { user } = await signInWithPopup(firebaseAuth, githubProvider);
-      console.log("Github User: ", user);
-      set({ loading: false });
-    } catch (error) {
-      set({ loading: false });
-      throw new Error("Github login error: " + error);
-    }
-  },
-
   regWithEmailPassword: async (formData) => {
     set({ loading: true });
 

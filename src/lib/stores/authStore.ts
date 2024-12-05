@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import { create } from "zustand";
 import { signInWithEmailAndPassword, signInWithPopup, signOut, User } from "firebase/auth";
 import { firebaseAuth, githubProvider, googleProvider } from "../google/firebase";
@@ -8,12 +9,13 @@ import { getApiUrl } from "@/utils/env";
 
 interface AuthState {
   user: User | null;
+  userInfo: any;
+  setUserInfo: (userInfo: any) => void;
   loading: boolean;
-  verifyLogin: (user: User) => Promise<void>;
+  verifyLogin: (user?: User) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
   loginWithGitHub: () => Promise<void>;
   loginWithEmailPassword: (email: string, password: string) => Promise<void>;
-  logginIn: (user: User) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -21,42 +23,30 @@ const useAuthStore = create<AuthState>((set) => ({
   user: null,
   loading: false,
 
+  //--Set User Info
+  userInfo: {},
+  setUserInfo: (userInfo) => {
+    set({ userInfo });
+  },
   //--Verify login
-  verifyLogin: async (user: User) => {
+  verifyLogin: async () => {
     set({ loading: true });
-    const { uid, refreshToken } = user;
     const headers = {
       "content-type": "application/json",
-      "refresh-token": `${refreshToken}`,
-      "user-uid": `${uid}`,
+      "refresh-token": `${localStorage.getItem("refresh-token")}`,
+      "user-uid": `${localStorage.getItem("user-uid")}`,
     };
     try {
       const { data }: { data: any } = await axios.get(`${getApiUrl()}/api/v1/login/verify`, { headers });
 
-      if (data.Error !== 0) {
-        set({ loading: false });
-        throw new Error(data.Message);
+      if (data.error !== 0) {
+        throw new Error(data.message);
       }
       return data;
-    } catch (ex) {
-      set({ loading: false });
+    } catch (ex: any) {
       throw ex;
-    }
-  },
-
-  logginIn: async (user: User) => {
-    const { uid, refreshToken } = user || {};
-    const headers = {
-      "content-type": "application/json",
-      "refresh-token": `${refreshToken}`,
-      "user-uid": `${uid}`,
-    };
-    const { data } = await axios.post(`${getApiUrl()}/auth/logging-in`, { id: Math.random() }, { headers });
-
-    if (data.error) {
-      const err = new Error(data.message);
-      err.name = data.referenceName;
-      throw err;
+    } finally {
+      set({ loading: false });
     }
   },
   //--Login with Google
@@ -69,13 +59,30 @@ const useAuthStore = create<AuthState>((set) => ({
     googleProvider.addScope("profile");
     googleProvider.addScope("email");
     googleProvider.addScope("openid");
-    try {
-      const { user } = await signInWithPopup(firebaseAuth, googleProvider);
-      set({ user, loading: false });
-    } catch (error) {
-      set({ loading: false });
-      throw new Error("Google login error: " + error);
-    }
+
+    signInWithPopup(firebaseAuth, googleProvider)
+      .then(({ user }) => {
+        if (user) {
+          const headers = {
+            "refresh-token": `${user.refreshToken}`,
+            "user-uid": `${user.uid}`,
+          };
+          axios
+            .post(`${getApiUrl()}/api/v1/login/check-user-info`, {}, { headers })
+            .then((res) => {
+              console.log("Check user info: ", res.data);
+            })
+            .catch((ex: any) => {
+              console.log("Error in check user info: ", ex.message);
+            });
+        }
+      })
+      .catch((error) => {
+        throw new Error("Google login error: " + error);
+      })
+      .finally(() => {
+        set({ loading: false });
+      });
   },
   //--Login with Github
   loginWithGitHub: async () => {
@@ -130,6 +137,8 @@ const useAuthStore = create<AuthState>((set) => ({
 
     try {
       await signOut(firebaseAuth);
+      localStorage.removeItem("refresh-token");
+      localStorage.removeItem("user-uid");
       set({ user: null, loading: false });
     } catch (error) {
       set({ loading: false });

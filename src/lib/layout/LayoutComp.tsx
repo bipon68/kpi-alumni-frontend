@@ -1,25 +1,9 @@
 import HeaderAdminWeb from "@/app/manage/components/header-admin/HeaderAdminWeb";
 import SidebarAdminWeb from "@/app/manage/components/sidebar-admin/SidebarAdminWeb";
-import { onAuthStateChanged } from "firebase/auth";
-import React, { FC, useEffect } from "react";
+import { FC, ReactElement } from "react";
 import { Outlet } from "react-router-dom";
-import { firebaseAuth } from "../google/firebase";
 
-const LayoutComp: FC = (): React.ReactElement => {
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(firebaseAuth, (user) => {
-      if (user) {
-        console.log("User Logged in: ", user);
-      } else {
-        console.log("User Logged out");
-      }
-    });
-    return () => unsubscribe();
-  }, []);
-
-  // Verify user authentication
-  // If not authenticated, redirect to login page
-
+const LayoutComp: FC = (): ReactElement => {
   return (
     <div className="layout">
       <HeaderAdminWeb />

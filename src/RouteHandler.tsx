@@ -6,11 +6,12 @@ import ManageUserPage from "./app/manage/users/ManageUserPage";
 import ManageDashboardPage from "./app/manage/dashboard/ManageDashboardPage";
 import LoadingPage from "./lib/loading/loadingPage";
 import SignupPage from "./app/login/SignupPage";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import useInitStore from "./lib/stores/initStore";
 import { useEffect } from "react";
 import LayoutComp from "./lib/layout/LayoutComp";
 import ManageEventPage from "./app/manage/events/ManageEventPage";
+import useAuthStore from "./lib/stores/authStore";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
@@ -68,12 +69,23 @@ const router = createBrowserRouter(
 
 export const RouteHandler = () => {
   const { loadInitInfo } = useInitStore();
+  const { verifyLogin, setUserInfo } = useAuthStore();
 
   useEffect(() => {
     (async () => {
       await loadInitInfo();
     })();
   }, [loadInitInfo]);
+
+  useEffect(() => {
+    verifyLogin()
+      .then((data) => {
+        setUserInfo(data);
+      })
+      .catch((ex: any) => {
+        toast.error(ex.message);
+      });
+  }, [setUserInfo, verifyLogin]);
   return (
     <>
       <RouterProvider router={router} future={{ v7_startTransition: true }} fallbackElement={<LoadingPage />} />

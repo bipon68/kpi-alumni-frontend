@@ -5,9 +5,9 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 
 const FormSection = () => {
-  const { loginWithGoogle, loginWithGitHub, loading, user, logout } = useAuthStore();
+  const { loginWithGoogle, loginWithGitHub, loading, userInfo, logout } = useAuthStore();
 
-  console.log(user);
+  console.log("userInfo", userInfo);
   return (
     <form className="flex flex-col gap-4">
       <Input
