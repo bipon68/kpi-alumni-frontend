@@ -1,7 +1,12 @@
+import AdmMembersPageHeader from "./components/AdmMembersPageHeader"
+import AdmMembersPageTableSection from "./components/AdmMembersPageTableSection"
 
 const AdmMembersPage = () => {
     return (
-        <div>AdmMembersPage</div>
+        <div>
+            <AdmMembersPageHeader />
+            <AdmMembersPageTableSection />
+        </div>
     )
 }
 
