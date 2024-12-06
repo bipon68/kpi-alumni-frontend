@@ -16,6 +16,7 @@ import EventPage from "./app/events/EventPage";
 import AdmMembersPage from "./app/manage/members/AdmMembersPage";
 import AdmJobsPage from "./app/manage/jobs/AdmJobsPage";
 import AdmManageUserPage from "./app/manage/users/AdmManageUserPage";
+import useAuthStore from "./lib/stores/authStore";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
@@ -121,12 +122,20 @@ const router = createBrowserRouter(
 
 export const RouteHandler = () => {
   const { loadInitInfo } = useInitStore();
+  const { verifyLogin, setUserInfo } = useAuthStore();
 
   useEffect(() => {
     (async () => {
       await loadInitInfo();
     })();
   }, [loadInitInfo]);
+
+  useEffect(() => {
+    (async () => {
+      const data = await verifyLogin();
+      setUserInfo(data);
+    })();
+  }, [setUserInfo, verifyLogin]);
   return (
     <>
       <RouterProvider
@@ -139,7 +148,7 @@ export const RouteHandler = () => {
         pauseOnHover
         position="bottom-left"
         autoClose={5000}
-        newestOnTop={true}
+        newestOnTop={false}
         closeOnClick
       />
     </>

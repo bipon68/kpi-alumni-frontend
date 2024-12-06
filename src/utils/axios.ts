@@ -20,7 +20,8 @@ class AxiosAuth {
     axios.defaults.headers.common["Content-Type"] = "application/json";
     axios.defaults.headers.common["Init-Id"] = localStorage.getItem("init-id") || "";
     axios.defaults.headers.common["Client-Time"] = new Date().toISOString();
-    axios.defaults.headers.common["Authorization"] = localStorage.getItem("token") || "";
+    axios.defaults.headers.common["user-uid"] = localStorage.getItem("user-uid") || "";
+    axios.defaults.headers.common["refresh-token"] = localStorage.getItem("refresh-token") || "";
     return this;
   };
 

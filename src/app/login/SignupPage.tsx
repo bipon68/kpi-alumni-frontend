@@ -89,19 +89,11 @@ const SignupForm = () => {
       >
         Signup
       </Button>
-      <div className=" text-center !font-normal text-white ">
-        You have an account?&nbsp;
-        <Link to="/login" className="font-semibold rounded-md py-2 text-blue-700 underline">
-          Login
-        </Link>
-      </div>
     </form>
   );
 };
 
 const SignupPage = () => {
-  const { regWithGitHub, regWithGoogle, loading } = useRegistrationStore();
-
   return (
     <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-300 relative overflow-hidden">
       {/* Floating Squares */}
@@ -129,54 +121,18 @@ const SignupPage = () => {
         </header>
         <SignupForm />
 
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-2 my-2 mt-4">
           <div className="w-1/4 h-0.5 bg-white bg-opacity-50"></div>
           <span className="text-white">or</span>
           <div className="w-1/4 h-0.5 bg-white bg-opacity-50"></div>
         </div>
-
-        {/* Login With Google Button */}
-        <div className="flex flex-col gap-3 mt-2">
-          <Button onClick={regWithGoogle} disabled={loading} className="bg-secondary-200 text-primary">
-            <span>G</span>
-            <span>Sign Up with Google</span>
-          </Button>
-          {/* Login With Github Button */}
-          <Button onClick={regWithGitHub} disabled={loading} className="bg-secondary-200 text-primary">
-            <span>G</span>
-            <span>Sign Up with Github</span>
-          </Button>
+        <div className=" text-center !font-normal text-white ">
+          You have an account?&nbsp;
+          <Link to="/login" className="font-semibold rounded-md py-2 text-blue-700 underline">
+            Login
+          </Link>
         </div>
       </div>
-
-      <style>{`
-    @keyframes moveSquare {
-      0% {
-        transform: translate(0, 0);
-      }
-      25% {
-        transform: translate(
-          ${Math.random() * 100}%,
-          ${Math.random() * 100}%
-        );
-      }
-      50% {
-        transform: translate(
-          ${Math.random() * 100}%,
-          ${Math.random() * 100}%
-        );
-      }
-      75% {
-        transform: translate(
-          ${Math.random() * 100}%,
-          ${Math.random() * 100}%
-        );
-      }
-      100% {
-        transform: translate(0, 0);
-      }
-    }
-  `}</style>
     </div>
   );
 };
