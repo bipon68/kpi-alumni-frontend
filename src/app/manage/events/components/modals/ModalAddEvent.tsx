@@ -17,8 +17,9 @@ const ModalBody: React.FC<TProps> = ({ closeModel }) => {
 
     return (
         <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
-            <div>
-                <Input id="picture" type="file" placeholder="Add Banner" />
+            <div className="flex flex-col gap-1">
+                <label htmlFor="picture" className="text-base font-medium text-primary">Add Picture</label>
+                <Input id="picture" type="file" />
             </div>
             <div className="flex gap-2">
                 <Input placeholder="Title" />
@@ -29,8 +30,8 @@ const ModalBody: React.FC<TProps> = ({ closeModel }) => {
                 <Input placeholder="Add Location" />
                 <Input placeholder="Organizer" />
             </div>
-            <div >
-                <label htmlFor="description" className="text-base text-primary">Description</label>
+            <div className="flex flex-col gap-1">
+                <label htmlFor="description" className="text-base font-medium text-primary">Description</label>
                 <Input className="w-full h-[100px] placeholder:" />
             </div>
             <div className="flex items-center justify-end gap-2">
@@ -49,7 +50,7 @@ const ModalAddEvent = () => {
         <Dialog open={modalName === "add-event"} onOpenChange={closeModel}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Are you absolutely sure?</DialogTitle>
+                    <DialogTitle className="text-2xl font-medium text-primary">Add Event</DialogTitle>
                 </DialogHeader>
                 <DialogDescription></DialogDescription>
                 <ModalBody closeModel={closeModel} />

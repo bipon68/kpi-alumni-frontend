@@ -19,17 +19,19 @@ const TableBodyComp: React.FC = () => {
                     <TableHead>{event.eventDateTime}</TableHead>
                     <TableHead>{event.location}</TableHead>
                     <TableHead>{event.eventStatus}</TableHead>
-                    <TableHead>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger>
-                                <EllipsisVertical />
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent>
-                                <DropdownMenuLabel>Edit Event</DropdownMenuLabel>
-                                <DropdownMenuLabel>Details</DropdownMenuLabel>
-                                <DropdownMenuLabel>Delete Event</DropdownMenuLabel>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                    <TableHead >
+                        <div className="flex justify-end">
+                            <DropdownMenu>
+                                <DropdownMenuTrigger className="border border-primary rounded-[5px]">
+                                    <EllipsisVertical />
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent>
+                                    <DropdownMenuLabel>Edit Event</DropdownMenuLabel>
+                                    <DropdownMenuLabel>Details</DropdownMenuLabel>
+                                    <DropdownMenuLabel>Delete Event</DropdownMenuLabel>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        </div>
                     </TableHead>
                 </TableRow>
             ))
