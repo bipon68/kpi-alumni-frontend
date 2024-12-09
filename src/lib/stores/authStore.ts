@@ -43,15 +43,15 @@ const useAuthStore = create<AuthState>((set) => ({
       "refresh-token": `${localStorage.getItem("refresh-token")}`,
       "user-uid": `${localStorage.getItem("user-uid")}`,
     };
+
     try {
       const { data }: { data: any } = await axios.get(`${getApiUrl()}/api/v1/login/verify`, { headers });
 
       if (data.error !== 0) {
-        set({ isAuthenticated: false });
+        set({ isAuthenticated: false, loading: false });
         throw new Error(data.message);
       }
       set({ userInfo: data, loading: false, isAuthenticated: true });
-      return data;
     } catch (ex: any) {
       throw ex;
     } finally {
@@ -156,7 +156,6 @@ const useAuthStore = create<AuthState>((set) => ({
       await signOut(firebaseAuth);
       localStorage.removeItem("refresh-token");
       localStorage.removeItem("user-uid");
-      set({ user: null, loading: false });
     } catch (error) {
       set({ loading: false });
       throw new Error("Logout error: " + error);

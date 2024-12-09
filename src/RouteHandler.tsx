@@ -69,7 +69,7 @@ const router = createBrowserRouter(
 
 export const RouteHandler = () => {
   const { loadInitInfo } = useInitStore();
-  const { verifyLogin, setUserInfo } = useAuthStore();
+  const { verifyLogin, setUserInfo, loading } = useAuthStore();
 
   useEffect(() => {
     (async () => {
@@ -79,10 +79,13 @@ export const RouteHandler = () => {
 
   useEffect(() => {
     (async () => {
-      const data = await verifyLogin();
-      setUserInfo(data);
+      await verifyLogin();
     })();
   }, [setUserInfo, verifyLogin]);
+
+  if (loading) {
+    return <LoadingPage />;
+  }
   return (
     <>
       <RouterProvider router={router} future={{ v7_startTransition: true }} fallbackElement={<LoadingPage />} />
