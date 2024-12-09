@@ -4,7 +4,6 @@ import { dummyEventData } from "./tableDummyData";
 import { EllipsisVertical } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "@/lib/ui/dropdown-menu";
 
-
 const TableBodyComp: React.FC = () => {
     return (
         <TableBody>
@@ -26,9 +25,19 @@ const TableBodyComp: React.FC = () => {
                                     <EllipsisVertical />
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
-                                    <DropdownMenuLabel>Edit Event</DropdownMenuLabel>
-                                    <DropdownMenuLabel>Details</DropdownMenuLabel>
-                                    <DropdownMenuLabel>Delete Event</DropdownMenuLabel>
+                                    <DropdownMenuLabel>
+                                        <button>Edit</button>
+                                    </DropdownMenuLabel>
+                                    <DropdownMenuLabel>
+                                        <button
+                                            onClick={() => window.location.href = `/manage/event/${event.eventId}/info`}
+                                        >
+                                            Details
+                                        </button>
+                                    </DropdownMenuLabel>
+                                    <DropdownMenuLabel>
+                                        <button>Delete</button>
+                                    </DropdownMenuLabel>
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </div>
