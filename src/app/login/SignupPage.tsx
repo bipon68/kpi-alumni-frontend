@@ -96,9 +96,9 @@ const SignupForm = () => {
 
 const SignupPage = () => {
   const { isAuthenticated } = useAuthStore();
-  if (isAuthenticated) {
-    window.location.href = "/";
-  }
+  // if (isAuthenticated) {
+  //   window.location.href = "/";
+  // }
   return (
     <div className="h-screen flex items-center justify-center bg-white relative overflow-hidden">
       {/* Login Container */}
@@ -113,6 +113,18 @@ const SignupPage = () => {
           <div className="w-1/4 h-0.5 bg-white bg-opacity-50"></div>
           <span className="text-white">or</span>
           <div className="w-1/4 h-0.5 bg-white bg-opacity-50"></div>
+        </div>
+        {/* Login With Google Button */}
+        <div className="flex flex-col gap-2 mb-4">
+          <Button className="bg-secondary-200 text-primary">
+            <span>G</span>
+            <span>Sign up with Google</span>
+          </Button>
+          {/* Login With Github Button */}
+          <Button className="bg-secondary-200 text-primary">
+            <span>G</span>
+            <span>Sign up with Github</span>
+          </Button>
         </div>
         <div className=" text-center !font-normal text-white ">
           You have an account?&nbsp;

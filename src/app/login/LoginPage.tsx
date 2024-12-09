@@ -64,9 +64,9 @@ const FormSection = () => {
 
 const LoginPage: FC = () => {
   const { isAuthenticated } = useAuthStore();
-  if (isAuthenticated) {
-    window.location.href = "/";
-  }
+  // if (isAuthenticated) {
+  //   window.location.href = "/";
+  // }
   return (
     <div className="h-screen flex items-center justify-center bg-white relative overflow-hidden">
       {/* Login Container */}
