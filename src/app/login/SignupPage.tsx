@@ -4,6 +4,7 @@ import { Checkbox } from "@/lib/ui/checkbox";
 import { Input } from "@/lib/ui/input";
 import { Link } from "react-router-dom";
 import useRegistrationStore from "@/lib/stores/registrationStore";
+import useAuthStore from "@/lib/stores/authStore";
 
 interface IFormData {
   FullName: string;
@@ -94,27 +95,14 @@ const SignupForm = () => {
 };
 
 const SignupPage = () => {
+  const { isAuthenticated } = useAuthStore();
+  // if (isAuthenticated) {
+  //   window.location.href = "/";
+  // }
   return (
-    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-blue-300 relative overflow-hidden">
-      {/* Floating Squares */}
-      <ul className="absolute w-full h-full flex flex-wrap">
-        {Array.from({ length: 10 }).map((_, i) => (
-          <li
-            key={i}
-            className="w-22 h-22 bg-white bg-opacity-15 rounded-md"
-            style={{
-              position: "absolute",
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animation: `moveSquare ${Math.random() * 5 + 5}s infinite linear`,
-              animationDelay: `${Math.random() * 2}s`,
-            }}
-          ></li>
-        ))}
-      </ul>
-
+    <div className="h-screen flex items-center justify-center bg-white relative overflow-hidden">
       {/* Login Container */}
-      <div className="bg-white w-104 bg-opacity-5 shadow-lg rounded-lg p-8 relative">
+      <div className="bg-secondary-700 w-104 bg-opacity-5 shadow-lg rounded-lg p-8 relative">
         <header className="flex justify-center gap-10 items-center mb-4">
           <img src="/src/assets/images/kpi-alumni-logo.png" alt="Logo" className="w-12 h-12" />
           <h1 className="text-[40px] font-semibold text-white">Signup</h1>
@@ -125,6 +113,18 @@ const SignupPage = () => {
           <div className="w-1/4 h-0.5 bg-white bg-opacity-50"></div>
           <span className="text-white">or</span>
           <div className="w-1/4 h-0.5 bg-white bg-opacity-50"></div>
+        </div>
+        {/* Login With Google Button */}
+        <div className="flex flex-col gap-2 mb-4">
+          <Button className="bg-secondary-200 text-primary">
+            <span>G</span>
+            <span>Sign up with Google</span>
+          </Button>
+          {/* Login With Github Button */}
+          <Button className="bg-secondary-200 text-primary">
+            <span>G</span>
+            <span>Sign up with Github</span>
+          </Button>
         </div>
         <div className=" text-center !font-normal text-white ">
           You have an account?&nbsp;
