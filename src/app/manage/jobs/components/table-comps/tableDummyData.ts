@@ -1,52 +1,56 @@
 export const dummyEventData = [
   {
-    banner: "https://via.placeholder.com/100x50.png?text=Event1", // Image URL for the banner
-    eventId: "E001",
-    title: "Alumni Reunion 2024",
-    description:
-      "A gathering of alumni to reconnect and celebrate the legacy of Khulna Polytechnic Institute.",
-    eventDateTime: "2024-12-15",
+    //banner: "https://via.placeholder.com/100x50.png?text=Event1", // Image URL for the banner
+    id: 11,
+    title: "Software Engineer",
+    CompanyName:"ABC",
+    Category:"CSE",
+    JobType:"PartTime",
+    Salary:50000,
+    SalaryType:"Monthly",
+    Experience:5,
     location: "KPI Campus Auditorium",
-    eventStatus: "Ongoing",
+    JoinDate:"2024-12-15",
+    DeadLine:"2024-12-15",
+    Reference:"job1234",
+    AboutJob:"A gathering of alumni to reconnect and celebrate the legacy of Khulna Polytechnic Institute.",
+    skillNames:["JavaScript", " React", " Node.js"]
   },
   {
     banner: "https://via.placeholder.com/100x50.png?text=Event2",
-    eventId: "E002",
-    title: "Tech Workshop",
-    description:
-      "Hands-on workshop on emerging technologies for students and alumni.",
-    eventDateTime: "2025-01-10",
-    location: "Online (Zoom Link)",
-    eventStatus: "Ended",
+    jobId: 22,
+    title: "Programmer",
+    CompanyName:"XYZ",
+    Category:"CSE",
+    JobType:"",
+    Salary:50000,
+    SalaryType:"",
+    Experience:50,
+    location: "KPI Campus Auditorium",
+    JoinDate:"2024-12-15",
+    DeadLine:"2024-12-15",
+    Reference:"",
+    AboutJob:"A gathering of alumni to reconnect and celebrate the legacy of Khulna Polytechnic Institute.",
+    skillNames:["",""]
   },
   {
     banner: "https://via.placeholder.com/100x50.png?text=Event3",
-    eventId: "E003",
-    title: "Annual Sports Day",
-    description:
-      "A day filled with fun and competitive sports activities for all alumni and students.",
-    eventDateTime: "2025-02-20",
-    location: "KPI Sports Ground",
-    eventStatus: "Held",
+    jobId: 33,
+    title: "Data Analysist",
+    CompanyName:"ABC",
+    Category:"CSE",
+    JobType:"",
+    Salary:50000,
+    SalaryType:"",
+    Experience:50,
+    location: "KPI Campus Auditorium",
+    JoinDate:"2024-12-15",
+    DeadLine:"2024-12-15",
+    Reference:"",
+    AboutJob:"A gathering of alumni to reconnect and celebrate the legacy of Khulna Polytechnic Institute.",
+    skillNames:["",""],
   },
-  {
-    banner: "https://via.placeholder.com/100x50.png?text=Event4",
-    eventId: "E004",
-    title: "Coding Hackathon",
-    description:
-      "A 24-hour coding challenge for alumni and students to solve real-world problems.",
-    eventDateTime: "2024-12-20",
-    location: "Computer Lab 2, KPI",
-    eventStatus: "Upcoming",
-  },
-  {
-    banner: "https://via.placeholder.com/100x50.png?text=Event5",
-    eventId: "E005",
-    title: "Networking Night",
-    description:
-      "An evening of networking with industry professionals and successful alumni.",
-    eventDateTime: "2024-12-30",
-    location: "Hotel Grand Khulna",
-    eventStatus: "Ended",
-  },
+  
+  
+  
 ];
