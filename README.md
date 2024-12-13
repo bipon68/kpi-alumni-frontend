@@ -111,3 +111,6 @@ nvm alias default 20.17.0
 ## Additional Resources
 - [nvm-windows Documentation](https://github.com/coreybutler/nvm-windows)
 - [Node.js Official Website](https://nodejs.org/)
+
+### Reference
+- [Node Version Manager](https://bipon770.gitbook.io/node-version-manager-nvm-windows)
