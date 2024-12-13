@@ -47,3 +47,67 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 For queries or suggestions, contact [Bipon Biswas](mailto:bipon770@gmail.com).
+
+
+# Node Version Manager (nvm-windows)
+
+## Overview
+`nvm-windows` is a version management utility for Node.js on Windows. It allows you to easily switch between multiple Node.js versions.
+
+## Installation
+
+1. Download the latest `nvm-windows` installer from the [releases page](https://github.com/coreybutler/nvm-windows/releases/tag/1.1.9).
+2. Run the installer and follow the installation instructions.
+3. Open a new Command Prompt or PowerShell window to start using `nvm-windows`.
+
+## Usage
+
+### List Installed Versions
+To list all Node.js versions installed on your system:
+```bash
+nvm list
+```
+
+### Use a Specific Version
+Switch to a specific Node.js version:
+```bash
+nvm use <version>
+```
+Example:
+```bash
+nvm use 20.17.0
+```
+
+### Install a New Version
+Download and install a specific Node.js version:
+```bash
+nvm install <version>
+```
+Example:
+```bash
+nvm install 18.16.0
+```
+
+### Uninstall a Version
+Remove an installed Node.js version:
+```bash
+nvm uninstall <version>
+```
+Example:
+```bash
+nvm uninstall 14.18.0
+```
+
+### Set a Default Version
+Set a default Node.js version for all new terminal sessions:
+```bash
+nvm alias default <version>
+```
+Example:
+```bash
+nvm alias default 20.17.0
+```
+
+## Additional Resources
+- [nvm-windows Documentation](https://github.com/coreybutler/nvm-windows)
+- [Node.js Official Website](https://nodejs.org/)
