@@ -22,3 +22,6 @@ export const deleteJob = async (id: number) => {
       throw error;
     }
   };
+
+
+  

@@ -4,6 +4,7 @@ import { EllipsisVertical } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "@/lib/ui/dropdown-menu";
 import { getJobs, deleteJob } from "./jobsApi"; // Import the API service
 
+
 interface JobDto {
   id: number;
   title: string;
