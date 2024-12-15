@@ -1,6 +1,7 @@
 import { navItems } from "@/lib/data/Navitem";
 import { logo } from "@/utils/icons";
 import NavLink from "./NavLink";
+import MobileNav from "./MobileNav";
 
 const NavbarMenu = () => {
   return (
@@ -22,6 +23,9 @@ const NavbarMenu = () => {
               <NavLink item={nav} isChild={false} />
             ))}
           </ul>
+          <div className="lg:hidden ">
+            <MobileNav />
+          </div>
         </nav>
       </div>
     </header>
