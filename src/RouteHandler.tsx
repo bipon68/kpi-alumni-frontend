@@ -17,39 +17,47 @@ import AdmMembersPage from "./app/manage/members/AdmMembersPage";
 import AdmJobsPage from "./app/manage/jobs/AdmJobsPage";
 import AdmManageUserPage from "./app/manage/users/AdmManageUserPage";
 import useAuthStore from "./lib/stores/authStore";
+import ClientLayout from "./lib/layout/ClientLayout";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
 const router = createBrowserRouter(
   [
     {
-      path: "*",
-      element: <div>404 Not Found</div>,
-    },
-    {
       path: "/",
-      element: <HomePage />,
+      element: <ClientLayout />,
+      children: [
+        {
+          path: "*",
+          element: <div>404 Not Found</div>,
+        },
+        {
+          path: "/",
+          element: <HomePage />,
+        },
+        {
+          path: "/login",
+          element: <LoginPage />,
+        },
+        {
+          path: "/signup",
+          element: <SignupPage />,
+        },
+        {
+          path: "/members",
+          element: <MembersPage />,
+        },
+        {
+          path: "/MembersGroupSection",
+          element: <MembersGroupsSections />,
+        },
+        {
+          path: "/events",
+          element: <EventPage />,
+        },
+      ],
     },
-    {
-      path: "/login",
-      element: <LoginPage />,
-    },
-    {
-      path: "/signup",
-      element: <SignupPage />,
-    },
-    {
-      path: "/members",
-      element: <MembersPage />,
-    },
-    {
-      path: "/MembersGroupSection",
-      element: <MembersGroupsSections />,
-    },
-    {
-      path: "/events",
-      element: <EventPage />,
-    },
+
     {
       path: "/manage",
       element: <LayoutComp />,
@@ -96,7 +104,8 @@ const router = createBrowserRouter(
             <ProtectedRoute
               element={<AdmJobsPage />}
               isAuthenticated={isAuthenticated}
-            />)
+            />
+          ),
         },
         {
           path: "/manage/members",
@@ -104,7 +113,8 @@ const router = createBrowserRouter(
             <ProtectedRoute
               element={<AdmMembersPage />}
               isAuthenticated={isAuthenticated}
-            />)
+            />
+          ),
         },
       ],
     },
