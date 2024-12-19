@@ -1,9 +1,9 @@
 import { Dialog, DialogContent, DialogTrigger } from "@/lib/ui/dialog";
-import { users } from "./Constants";
-import { MembersAddBtnComp } from "./MembersAddBtnComp";
+import { users } from "./constants";
 import { MembersEditBtnComp } from "./MembersEditBtnComp";
 import MembersSearch from "./MembersSearch";
 import MembersProfileComp from "./MembersProfileComp";
+import { Button } from "@/lib/ui/button";
 
 const MembersGroupsSections = () => {
   return (
@@ -12,7 +12,9 @@ const MembersGroupsSections = () => {
       <div className=" flex w-full items-center justify-between">
         <h1 className="text-xl font-bold text-secondary ">127 Users</h1>
         <div className=" m-5">
-          <MembersAddBtnComp />
+          <Button title="Invite" variant="secondary" className=" text-white">
+            Invite
+          </Button>
         </div>
       </div>
 
