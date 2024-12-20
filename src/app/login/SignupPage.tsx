@@ -4,7 +4,8 @@ import { Checkbox } from "@/lib/ui/checkbox";
 import { Input } from "@/lib/ui/input";
 import { Link } from "react-router-dom";
 import useRegistrationStore from "@/lib/stores/registrationStore";
-import useAuthStore from "@/lib/stores/authStore";
+import RegistrationModal from "./RegistrationModal";
+// import useAuthStore from "@/lib/stores/authStore";
 
 interface IFormData {
   FullName: string;
@@ -95,7 +96,8 @@ const SignupForm = () => {
 };
 
 const SignupPage = () => {
-  const { isAuthenticated } = useAuthStore();
+  // const { isAuthenticated } = useAuthStore();
+  const { registrationWithGoogle } = useRegistrationStore();
   // if (isAuthenticated) {
   //   window.location.href = "/";
   // }
@@ -116,7 +118,7 @@ const SignupPage = () => {
         </div>
         {/* Login With Google Button */}
         <div className="flex flex-col gap-2 mb-4">
-          <Button className="bg-secondary-200 text-primary">
+          <Button onClick={registrationWithGoogle} className="bg-secondary-200 text-primary">
             <span>G</span>
             <span>Sign up with Google</span>
           </Button>
@@ -133,6 +135,7 @@ const SignupPage = () => {
           </Link>
         </div>
       </div>
+      <RegistrationModal />
     </div>
   );
 };
