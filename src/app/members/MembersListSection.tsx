@@ -28,7 +28,7 @@ const MembersListSection: React.FC = () => {
               {section.subtitle}
             </div>
             <div className="flex items-center space-x-[-10px] mt-5">
-              {users.slice(0, 6).map((user, userIndex) => (
+              {users.map((user, userIndex) => (
                 <div
                   key={userIndex}
                   className="relative size-7 border-2 border-white rounded-full overflow-hidden"
