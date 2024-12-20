@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./app/home";
 import LoginPage from "@/app/login/LoginPage";
 import ProtectedRoute from "./lib/auth/protectRoute";
-import ManageUserPage from "./app/manage/users/ManageUserPage";
 import ManageDashboardPage from "./app/manage/dashboard/ManageDashboardPage";
 import LoadingPage from "./lib/loading/loadingPage";
 import SignupPage from "./app/login/SignupPage";
@@ -10,29 +9,55 @@ import { ToastContainer } from "react-toastify";
 import useInitStore from "./lib/stores/initStore";
 import { useEffect } from "react";
 import LayoutComp from "./lib/layout/LayoutComp";
-import ManageEventPage from "./app/manage/events/ManageEventPage";
+import AdmEventPage from "./app/manage/events/AdmEventPage";
+import MembersPage from "./app/members/MembersPage";
+import MembersGroupsSections from "./app/members/MembersGroupSection";
+import EventPage from "./app/events/EventPage";
+import AdmMembersPage from "./app/manage/members/AdmMembersPage";
+import AdmJobsPage from "./app/manage/jobs/AdmJobsPage";
+import AdmManageUserPage from "./app/manage/users/AdmManageUserPage";
 import useAuthStore from "./lib/stores/authStore";
+import ClientLayout from "./lib/layout/ClientLayout";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
 const router = createBrowserRouter(
   [
     {
-      path: "*",
-      element: <div>404 Not Found</div>,
-    },
-    {
       path: "/",
-      element: <HomePage />,
+      element: <ClientLayout />,
+      children: [
+        {
+          path: "*",
+          element: <div>404 Not Found</div>,
+        },
+        {
+          path: "/",
+          element: <HomePage />,
+        },
+        {
+          path: "/login",
+          element: <LoginPage />,
+        },
+        {
+          path: "/signup",
+          element: <SignupPage />,
+        },
+        {
+          path: "/members",
+          element: <MembersPage />,
+        },
+        {
+          path: "/MembersGroupSection",
+          element: <MembersGroupsSections />,
+        },
+        {
+          path: "/events",
+          element: <EventPage />,
+        },
+      ],
     },
-    {
-      path: "/login",
-      element: <LoginPage />,
-    },
-    {
-      path: "/signup",
-      element: <SignupPage />,
-    },
+
     {
       path: "/manage",
       element: <LayoutComp />,
@@ -52,6 +77,57 @@ const router = createBrowserRouter(
         {
           path: "/manage/user",
           element: <ProtectedRoute element={<ManageUserPage />} />,
+          element: (
+            <ProtectedRoute
+              element={<ManageDashboardPage />}
+              isAuthenticated={isAuthenticated}
+            />
+          ),
+        },
+        {
+          path: "/manage/dashboard",
+          element: (
+            <ProtectedRoute
+              element={<ManageDashboardPage />}
+              isAuthenticated={isAuthenticated}
+            />
+          ),
+        },
+        {
+          path: "/manage/event",
+          element: (
+            <ProtectedRoute
+              element={<AdmEventPage />}
+              isAuthenticated={isAuthenticated}
+            />
+          ),
+        },
+        {
+          path: "/manage/user",
+          element: (
+            <ProtectedRoute
+              element={<AdmManageUserPage />}
+              isAuthenticated={isAuthenticated}
+            />
+          ),
+        },
+        {
+          path: "/manage/jobs",
+          element: (
+            <ProtectedRoute
+              element={<AdmJobsPage />}
+              isAuthenticated={isAuthenticated}
+            />
+          ),
+        },
+        {
+          path: "/manage/members",
+          element: (
+            <ProtectedRoute
+              element={<AdmMembersPage />}
+              isAuthenticated={isAuthenticated}
+            />
+          ),
         },
       ],
     },
@@ -88,7 +164,11 @@ export const RouteHandler = () => {
   }
   return (
     <>
-      <RouterProvider router={router} future={{ v7_startTransition: true }} fallbackElement={<LoadingPage />} />
+      <RouterProvider
+        router={router}
+        future={{ v7_startTransition: true }}
+        fallbackElement={<LoadingPage />}
+      />
       <ToastContainer
         theme="light"
         pauseOnHover
