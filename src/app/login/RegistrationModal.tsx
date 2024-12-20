@@ -32,17 +32,7 @@ const RegistrationForm = () => {
     event.preventDefault();
     setLoading(true);
     try {
-      const { data }: { data: any } = await axios.post(
-        `${getApiUrl()}/api/v1/registration/registration-complete`,
-        formData,
-        {
-          headers: {
-            "content-type": "application/json",
-            "user-uid": `${firebaseUser?.uid}`,
-            "refresh-token": `${firebaseUser?.refreshToken}`,
-          },
-        }
-      );
+      const { data }: { data: any } = await axios.post(`${getApiUrl()}/api/v1/registration`, formData);
 
       if (data.error !== 0) {
         toast.error(data.message);

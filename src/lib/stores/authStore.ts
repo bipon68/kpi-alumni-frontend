@@ -32,20 +32,19 @@ const useAuthStore = create<AuthState>((set) => ({
   },
   //--Set User Info
   userInfo: {},
-  setUserInfo: (userInfo) => {
-    set({ userInfo });
+  setUserInfo: (data) => {
+    set({ userInfo: data });
   },
   //--Verify login
   verifyLogin: async () => {
     set({ loading: true });
     const headers = {
       "content-type": "application/json",
-      "refresh-token": `${localStorage.getItem("refresh-token")}`,
-      "user-uid": `${localStorage.getItem("user-uid")}`,
+      authorization: `Bearer ${localStorage.getItem("Authorization")}`,
     };
 
     try {
-      const { data }: { data: any } = await axios.get(`${getApiUrl()}/api/v1/login/verify`, { headers });
+      const { data }: { data: any } = await axios.get(`${getApiUrl()}/api/v1/auth`, { headers });
 
       if (data.error !== 0) {
         set({ isAuthenticated: false, loading: false });
@@ -77,7 +76,7 @@ const useAuthStore = create<AuthState>((set) => ({
             "user-uid": `${user.uid}`,
           };
           axios
-            .post(`${getApiUrl()}/api/v1/login/check-user-info`, {}, { headers })
+            .post(`${getApiUrl()}/api/v1/auth`, {}, { headers })
             .then(({ data }) => {
               if (data.error === 0) {
                 localStorage.setItem("refresh-token", user.refreshToken);
