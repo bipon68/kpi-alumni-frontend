@@ -39,19 +39,19 @@ const router = createBrowserRouter(
       children: [
         {
           path: "/manage",
-          element: <ProtectedRoute element={<ManageDashboardPage />} isAuthenticated={isAuthenticated} />,
+          element: <ProtectedRoute element={<ManageDashboardPage />} />,
         },
         {
           path: "/manage/dashboard",
-          element: <ProtectedRoute element={<ManageDashboardPage />} isAuthenticated={isAuthenticated} />,
+          element: <ProtectedRoute element={<ManageDashboardPage />} />,
         },
         {
           path: "/manage/event",
-          element: <ProtectedRoute element={<ManageEventPage />} isAuthenticated={isAuthenticated} />,
+          element: <ProtectedRoute element={<ManageEventPage />} />,
         },
         {
           path: "/manage/user",
-          element: <ProtectedRoute element={<ManageUserPage />} isAuthenticated={isAuthenticated} />,
+          element: <ProtectedRoute element={<ManageUserPage />} />,
         },
       ],
     },

@@ -10,6 +10,7 @@ import { getApiUrl } from "@/utils/env";
 interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
+  loginMessage: string;
   setIsAuthenticated: (isAuthenticated: boolean) => void;
   userInfo: any;
   setUserInfo: (userInfo: any) => void;
@@ -27,6 +28,7 @@ const useAuthStore = create<AuthState>((set) => ({
   user: null,
   loading: false,
   isAuthenticated: false,
+  loginMessage: "",
   setIsAuthenticated: (isAuthenticated) => {
     set({ isAuthenticated });
   },
@@ -37,7 +39,7 @@ const useAuthStore = create<AuthState>((set) => ({
   },
   //--Verify login
   verifyLogin: async () => {
-    set({ loading: true });
+    set({ loading: true, isAuthenticated: false });
     const headers = {
       "content-type": "application/json",
       authorization: `Bearer ${localStorage.getItem("Authorization")}`,
@@ -53,8 +55,6 @@ const useAuthStore = create<AuthState>((set) => ({
       set({ userInfo: data, loading: false, isAuthenticated: true });
     } catch (ex: any) {
       throw ex;
-    } finally {
-      set({ loading: false });
     }
   },
   //--Login with Google
