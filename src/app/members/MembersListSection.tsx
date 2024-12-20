@@ -1,7 +1,7 @@
 import React from "react";
 import MembersSearch from "./MembersSearch";
 import { MembersAddBtnComp } from "./MembersAddBtnComp";
-import { sections, users } from "./Constants";
+import { sections, users } from "./constants";
 import { Link } from "react-router-dom";
 
 const MembersListSection: React.FC = () => {
