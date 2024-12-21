@@ -30,11 +30,11 @@ const ProfilePage: FC = () => {
           </p>
         </div>
         <div className="mt-6">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded">
+          <button className="bg-secondary text-white px-4 py-2 rounded">
             Edit Profile
           </button>
         </div>
-        <div className="font-sans leading-normal tracking-normal min-h-screen items-center ">
+        <div className="font-sans leading-normal tracking-normal  items-center ">
           <div className="flex justify-between ">
             {/* Profile Details */}
             <div className=" w-full py-6">
@@ -102,7 +102,7 @@ const ProfilePage: FC = () => {
           </div>
           {/* Call to Action */}
           <div className=" py-6 text-center">
-            <button className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600">
+            <button className="px-4 py-2 bg-secondary text-white rounded hover:bg-indigo-600">
               Send Message
             </button>
           </div>
