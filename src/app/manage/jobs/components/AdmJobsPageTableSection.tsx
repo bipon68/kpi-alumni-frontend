@@ -13,7 +13,7 @@ const AdmJobsPageTableSection: React.FC<AdmJobsPageTableSectionProps> = ({ searc
   return (
     <div className="mt-3">
       <Table>
-        <TableHeaderComp />
+        <TableHeaderComp  />
         {/* Pass searchCriteria to TableBodyComp */}
         <TableBodyComp searchCriteria={searchCriteria} />
       </Table>

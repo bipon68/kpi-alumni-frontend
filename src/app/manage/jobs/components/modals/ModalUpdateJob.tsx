@@ -41,30 +41,32 @@ const ModalUpdateJob: React.FC<{ closeModal: () => void; jobId: number }> = ({ c
     const fetchJobDetails = async () => {
       try {
         const response = await axios.get(`http://localhost:5050/api/v1/job/${jobId}`);
-        const data = response.data;
+        const data = response.data.data;
+        //console.log("API Response:", response.data);
+       
 
-        // Map API response to formData
+        // Ensure correct data mapping
         setFormData({
-          title: data.title || "",
-          category: data.category || "",
-          jobType: data.jobType === 0 ? "FullTime" : "PartTime", // Convert enum to string
-          salary: data.salary || 0,
-          salaryType: data.salaryType === 0 ? "Monthly" : "Annually", // Convert enum to string
-          experience: data.experience || 0,
-          location: data.location || "",
-          joinDate: data.joinDate || "",
-          deadline: data.deadline || "",
-          reference: data.reference || "",
-          aboutJob: data.aboutJob || "",
-        });
-      } catch (error) {
+            title: data.title || "",
+            category: data.category || "",
+            jobType: data.jobType || "FullTime", 
+            salary: data.salary || 0,
+            salaryType: data.salaryType || "Monthly", 
+            experience: data.experience || 0,
+            location: data.location || "",
+            joinDate: data.joinDate ? new Date(data.joinDate).toISOString().split("T")[0] : "",
+            deadline: data.deadline ? new Date(data.deadline).toISOString().split("T")[0] : "",
+            reference: data.reference || "",
+            aboutJob: data.aboutJob || "",
+          });
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching job details:", err);
         setError("Failed to fetch job details. Please try again.");
       }
     };
 
-    if (jobId) {
-      fetchJobDetails();
-    }
+    if (jobId) fetchJobDetails();
   }, [jobId]);
 
   // Handle input changes
@@ -208,6 +210,8 @@ const ModalUpdateJob: React.FC<{ closeModal: () => void; jobId: number }> = ({ c
               name="aboutJob"
               value={formData.aboutJob}
               onChange={handleChange}
+              rows={4}
+              className="w-full border border-gray-300 rounded-md"
             />
           </label>
         </div>
