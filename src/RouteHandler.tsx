@@ -65,6 +65,19 @@ const router = createBrowserRouter(
       children: [
         {
           path: "/manage",
+          element: <ProtectedRoute element={<ManageDashboardPage />} />,
+        },
+        {
+          path: "/manage/dashboard",
+          element: <ProtectedRoute element={<ManageDashboardPage />} />,
+        },
+        {
+          path: "/manage/event",
+          element: <ProtectedRoute element={<ManageEventPage />} />,
+        },
+        {
+          path: "/manage/user",
+          element: <ProtectedRoute element={<ManageUserPage />} />,
           element: (
             <ProtectedRoute
               element={<ManageDashboardPage />}
