@@ -18,6 +18,7 @@ import AdmJobsPage from "./app/manage/jobs/AdmJobsPage";
 import AdmManageUserPage from "./app/manage/users/AdmManageUserPage";
 import useAuthStore from "./lib/stores/authStore";
 import ClientLayout from "./lib/layout/ClientLayout";
+import ProfilePage from "./app/manage/profile/ProfilePage";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
@@ -125,6 +126,15 @@ const router = createBrowserRouter(
           element: (
             <ProtectedRoute
               element={<AdmMembersPage />}
+              isAuthenticated={isAuthenticated}
+            />
+          ),
+        },
+        {
+          path: "/manage/ProfilePage",
+          element: (
+            <ProtectedRoute
+              element={<ProfilePage />}
               isAuthenticated={isAuthenticated}
             />
           ),
