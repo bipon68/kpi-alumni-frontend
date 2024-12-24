@@ -17,6 +17,7 @@ import AdmMembersPage from "./app/manage/members/AdmMembersPage";
 import AdmJobsPage from "./app/manage/jobs/AdmJobsPage";
 import AdmManageUserPage from "./app/manage/users/AdmManageUserPage";
 import useAuthStore from "./lib/stores/authStore";
+import JobDetailsPage from "./app/manage/jobs/components/table-comps/JobDetailsPage";
 
 const isAuthenticated = true; // Change this based on real authentication state
 
@@ -97,6 +98,15 @@ const router = createBrowserRouter(
               element={<AdmJobsPage />}
               isAuthenticated={isAuthenticated}
             />)
+        },
+        {
+          path: "/manage",
+          children: [
+            {
+              path: "jobs/:id", 
+              element: <JobDetailsPage />,
+            },
+          ],
         },
         {
           path: "/manage/members",

@@ -90,7 +90,7 @@ const TableBodyComp: React.FC<{ searchCriteria: SearchCriteria }> = ({ searchCri
   const handleInvite = (job: JobDto) => {
     setSelectedJob(job);
     setIsInviteModalOpen(true);
-    console.log("Invite Modal Triggered for Job:", job);
+    //console.log("Invite Modal Triggered for Job:", job);
   };
 
   return (

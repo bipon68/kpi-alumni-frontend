@@ -44,7 +44,7 @@ const ModalInviteJob: React.FC<ModalInviteJobProps> = ({ closeModal, job }) => {
 
   return (
     <Dialog open={true} onOpenChange={closeModal}>
-      <DialogContent className="p-6 space-y-4">
+      <DialogContent className="p-6 space-y-6 max-w-lg mx-auto bg-white rounded-lg shadow-xl">
         {/* Dialog Header */}
         <DialogHeader>
           <DialogTitle className="text-xl font-semibold text-gray-800">
@@ -62,30 +62,24 @@ const ModalInviteJob: React.FC<ModalInviteJobProps> = ({ closeModal, job }) => {
             placeholder="Enter recipient's email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border-gray-300 focus:border-primary focus:ring-primary"
+            className="w-full border-gray-300 focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
 
         {/* Button Actions */}
-        <div className="flex justify-between items-center space-x-3">
+        <div className="flex justify-between items-center space-x-4">
           <Button
-            className="flex-1 py-2 text-white bg-secondary hover:bg-secondary-dark"
+            className="flex-1 py-2 text-white bg-green-600 hover:bg-green-700 rounded-lg transition duration-200"
             onClick={handleSendInvite}
             disabled={isSending}
           >
             {isSending ? "Sending..." : "Send Invitation"}
           </Button>
           <Button
-            className="flex-1 py-2 text-white bg-blue-500 hover:bg-blue-600"
+            className="flex-1 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition duration-200"
             onClick={handleCopyLink}
           >
             Copy Job Link
-          </Button>
-          <Button
-            className="flex-1 py-2 text-white bg-red-500 hover:bg-red-600"
-            onClick={closeModal}
-          >
-            Cancel
           </Button>
         </div>
       </DialogContent>
